@@ -1,8 +1,15 @@
 package com.example.PIM.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "User")
 public class User {
+    @javax.persistence.Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer id;
     public String name;
+    @Column(unique=true)
     public String email;
 
     public User() {
