@@ -10,9 +10,10 @@ import java.util.List;
 public class ProductService {
 
     public List<Product> getProducts(){
-        Product product = new Product(1, "Product1", "(insert description)");
         List<Product> products = new ArrayList<>();
-        products.add(product);
+        products.add(new Product(1, "Product 1", "(insert description)"));
+        products.add(new Product(2, "Product 2", "(insert description)"));
+        products.add(new Product(3, "Product 3", "(insert description)"));
         return products;
     }
 }
