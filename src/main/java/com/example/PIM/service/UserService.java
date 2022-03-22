@@ -1,18 +1,23 @@
 package com.example.PIM.service;
 
 import com.example.PIM.model.User;
+import com.example.PIM.repositories.IUserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class UserService {
 
+    private final IUserRepository userRepository;
+
+    @Autowired
+    public UserService(IUserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     public List<User> getUsers(){
-        User user = new User(1, "admin", "admin@gmail.com");
-        List<User> users = new ArrayList<>();
-        users.add(user);
-        return users;
+        return userRepository.findAll();
     }
 }
