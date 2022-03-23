@@ -25,8 +25,8 @@ public class UserController {
     }
 
     @PostMapping(value = "/create")
-    public void CreateUser(@RequestBody User newUser)
+    public void createUser(@RequestBody User newUser)
     {
-        userService.CreateUser(newUser);
+        userService.createUser(newUser);
     }
 }

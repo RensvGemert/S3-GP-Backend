@@ -22,7 +22,7 @@ public class UserService {
 
     }
 
-    public void CreateUser(User newUser)
+    public void createUser(User newUser)
     {
         this.userRepository.save(newUser);
     }
