@@ -10,49 +10,49 @@ import javax.persistence.Table;
 public class Product {
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer productId;
-    public String productTitle;
-    public String productDescription;
+    public Integer id;
+    public String title;
+    public String description;
 
     public Product() {
     }
 
-    public Product(Integer productId, String productTitle, String productDescription) {
-        this.productId = productId;
-        this.productTitle = productTitle;
-        this.productDescription = productDescription;
+    public Product(Integer id, String title, String description) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
     }
 
-    public Integer getProductId() {
-        return productId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setProductId(Integer productId) {
-        this.productId = productId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getProductTitle() {
-        return productTitle;
+    public String getTitle() {
+        return title;
     }
 
-    public void setProductTitle(String productTitle) {
-        this.productTitle = productTitle;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getProductDescription() {
-        return productDescription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setProductDescription(String productDescription) {
-        this.productDescription = productDescription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
     public String toString() {
         return "Product{" +
-                "productId=" + productId +
-                ", productTitle='" + productTitle + '\'' +
-                ", productDescription='" + productDescription + '\'' +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
                 '}';
     }
 }
