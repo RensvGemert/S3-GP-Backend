@@ -10,7 +10,7 @@ import javax.persistence.Table;
 public class Product {
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer id;
+    public int id;
     public String title;
     public String description;
 
@@ -23,11 +23,11 @@ public class Product {
         this.description = description;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
