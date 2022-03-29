@@ -1,9 +1,6 @@
 package com.example.PIM.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "Products")
@@ -14,13 +11,26 @@ public class Product {
     public String productTitle;
     public String productDescription;
 
+    @ManyToOne
+    @JoinColumn(name = "companyid")
+    private Company company;
+
     public Product() {
     }
 
-    public Product(Integer productId, String productTitle, String productDescription) {
+    public Product(Integer productId, String productTitle, String productDescription, Company company) {
         this.productId = productId;
         this.productTitle = productTitle;
         this.productDescription = productDescription;
+        this.company = company;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
     }
 
     public Integer getProductId() {
