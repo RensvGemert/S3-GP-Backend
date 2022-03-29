@@ -11,7 +11,7 @@ public class Company
 {
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer companyid;
+    public int companyid;
     public String companyname;
     public String companydiscription;
     public byte companyrole;
@@ -19,8 +19,17 @@ public class Company
     public LocalDateTime updatedat;
     @OneToMany(mappedBy = "company")
     public Set<Product> products = new HashSet<>();
+    @OneToMany(mappedBy = "company")
+    public Set<User> users = new HashSet<>();
 
-    public Company(Integer companyid, String companyname, String companydiscription, byte companyrole, LocalDateTime createdat, LocalDateTime updatedat, Set<Product> products) {
+
+
+    public Company()
+    {
+
+    }
+
+    public Company(int companyid, String companyname, String companydiscription, byte companyrole, LocalDateTime createdat, LocalDateTime updatedat, Set<Product> products, Set<User> users) {
         this.companyid = companyid;
         this.companyname = companyname;
         this.companydiscription = companydiscription;
@@ -28,6 +37,7 @@ public class Company
         this.createdat = createdat;
         this.updatedat = updatedat;
         this.products = products;
+        this.users = users;
     }
     public Company(String companyname, String companydiscription, byte companyrole, LocalDateTime createdat, LocalDateTime updatedat) {
 
@@ -39,24 +49,11 @@ public class Company
 
     }
 
-    public Company()
-    {
-
-    }
-
-    public Set<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(Set<Product> products) {
-        this.products = products;
-    }
-
-    public Integer getCompanyid() {
+    public int getCompanyid() {
         return companyid;
     }
 
-    public void setCompanyid(Integer companyid) {
+    public void setCompanyid(int companyid) {
         this.companyid = companyid;
     }
 
@@ -100,6 +97,22 @@ public class Company
         this.updatedat = updatedat;
     }
 
+    public Set<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<Product> products) {
+        this.products = products;
+    }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
+
     @Override
     public String toString() {
         return "Company{" +
@@ -110,6 +123,7 @@ public class Company
                 ", createdat=" + createdat +
                 ", updatedat=" + updatedat +
                 ", products=" + products +
+                ", users=" + users +
                 '}';
     }
 }
