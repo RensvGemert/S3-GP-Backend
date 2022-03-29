@@ -99,4 +99,17 @@ public class Company
     public void setUpdatedat(LocalDateTime updatedat) {
         this.updatedat = updatedat;
     }
+
+    @Override
+    public String toString() {
+        return "Company{" +
+                "companyid=" + companyid +
+                ", companyname='" + companyname + '\'' +
+                ", companydiscription='" + companydiscription + '\'' +
+                ", companyrole=" + companyrole +
+                ", createdat=" + createdat +
+                ", updatedat=" + updatedat +
+                ", products=" + products +
+                '}';
+    }
 }
