@@ -1,44 +1,58 @@
 package com.example.PIM.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "User")
 public class User {
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int id;
+    public int userid;
     public String name;
     @Column(unique=true)
     public String email;
     public String password;
+    public boolean role;
     @ManyToOne
     @JoinColumn(name = "companyid")
     private Company company;
 
+    @OneToMany(mappedBy = "user")
+    public Set<Message> messagesrecieved = new HashSet<>();
+
+
+
+
     public User() {
     }
 
-    public User(int id, String name, String email, String password, Company company) {
-        this.id = id;
+    public User(int userid, String name, String email, String password, boolean role, Company company, Set<Message> messagesrecieved) {
+        this.userid = userid;
         this.name = name;
         this.email = email;
         this.password = password;
+        this.role = role;
         this.company = company;
+        this.messagesrecieved = messagesrecieved;
     }
-    public User(String name, String email, String password, Company company) {
+
+    public User(String name, String email, String password, boolean role, Company company, Set<Message> messagesrecieved) {
         this.name = name;
         this.email = email;
         this.password = password;
+        this.role = role;
         this.company = company;
+        this.messagesrecieved = messagesrecieved;
     }
 
-    public int getId() {
-        return id;
+    public int getUserid() {
+        return userid;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUserid(int userid) {
+        this.userid = userid;
     }
 
     public String getName() {
@@ -65,6 +79,14 @@ public class User {
         this.password = password;
     }
 
+    public boolean isRole() {
+        return role;
+    }
+
+    public void setRole(boolean role) {
+        this.role = role;
+    }
+
     public Company getCompany() {
         return company;
     }
@@ -73,14 +95,24 @@ public class User {
         this.company = company;
     }
 
+    public Set<Message> getMessagesrecieved() {
+        return messagesrecieved;
+    }
+
+    public void setMessagesrecieved(Set<Message> messagesrecieved) {
+        this.messagesrecieved = messagesrecieved;
+    }
+
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
+                "userid=" + userid +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", role=" + role +
                 ", company=" + company +
+                ", messagesrecieved=" + messagesrecieved +
                 '}';
     }
 }
