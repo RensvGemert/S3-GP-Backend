@@ -3,6 +3,8 @@ package com.example.PIM.controller;
 import com.example.PIM.model.Product;
 import com.example.PIM.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,13 +28,17 @@ public class ProductController {
     }
 
     @PostMapping
-	public void createProduct(@RequestBody Product product) {
+    public ResponseEntity<String> createProduct(@RequestBody Product product) {
         productService.createProduct(product);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body("{ \"id\": "+ product.id + " }");
     }
 
     @DeleteMapping("/{id}")
-	public void deleteProduct(@PathVariable("id") int id) {
+	public ResponseEntity<String> deleteProduct(@PathVariable("id") int id) {
         productService.deleteProduct(id);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body("{ \"id\": "+ id + " }");
     }
 
     @GetMapping("/{id}")
