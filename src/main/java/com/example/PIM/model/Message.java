@@ -9,9 +9,9 @@ public class Message
 {
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int messageid;
-    public String messagecontent;
-    public LocalDateTime createdat;
+    public int messageId;
+    public String messageContent;
+    public LocalDateTime createdAt;
 
 
 
@@ -33,50 +33,49 @@ public class Message
 
     }
 
-    public Message(int messageid, String messagecontent, LocalDateTime createdat, User user) {
-
-        this.messageid = messageid;
-        this.messagecontent = messagecontent;
-        this.createdat = createdat;
+    public Message(int messageId, String messageContent, LocalDateTime createdAt, User user) {
+        this.messageId = messageId;
+        this.messageContent = messageContent;
+        this.createdAt = createdAt;
         this.user = user;
     }
 
-    public Message(String messagecontent, LocalDateTime createdat, User user) {
-        this.messagecontent = messagecontent;
-        this.createdat = createdat;
+    public Message(String messageContent, LocalDateTime createdAt, User user) {
+        this.messageContent = messageContent;
+        this.createdAt = createdAt;
         this.user = user;
     }
 
-    public int getMessageid() {
-        return messageid;
+    public int getMessageId() {
+        return messageId;
     }
 
-    public void setMessageid(int messageid) {
-        this.messageid = messageid;
+    public void setMessageId(int messageId) {
+        this.messageId = messageId;
     }
 
-    public String getMessagecontent() {
-        return messagecontent;
+    public String getMessageContent() {
+        return messageContent;
     }
 
-    public void setMessagecontent(String messagecontent) {
-        this.messagecontent = messagecontent;
+    public void setMessageContent(String messageContent) {
+        this.messageContent = messageContent;
     }
 
-    public LocalDateTime getCreatedat() {
-        return createdat;
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreatedat(LocalDateTime createdat) {
-        this.createdat = createdat;
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 
     @Override
     public String toString() {
         return "Message{" +
-                "messageid=" + messageid +
-                ", messagecontent='" + messagecontent + '\'' +
-                ", createdat=" + createdat +
+                "messageId=" + messageId +
+                ", messageContent='" + messageContent + '\'' +
+                ", createdAt=" + createdAt +
                 ", user=" + user +
                 '}';
     }

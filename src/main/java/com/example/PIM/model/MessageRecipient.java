@@ -8,13 +8,13 @@ public class MessageRecipient {
     public MessageRecipientKey  id;
 
     @ManyToOne
-    @MapsId("userid")
-    @JoinColumn(name = "userid")
+    @MapsId("userId")
+    @JoinColumn(name = "userId")
     public User user;
 
     @ManyToOne
-    @MapsId("messageid")
-    @JoinColumn(name = "messageid")
+    @MapsId("messageId")
+    @JoinColumn(name = "messageId")
     public Message message;
 
     public MessageRecipient(MessageRecipientKey id, User user, Message message) {

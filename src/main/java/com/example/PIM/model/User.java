@@ -9,18 +9,18 @@ import java.util.Set;
 public class User {
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int userid;
+    public int userId;
     public String name;
     @Column(unique=true)
     public String email;
     public String password;
     public boolean role;
     @ManyToOne
-    @JoinColumn(name = "companyid")
+    @JoinColumn(name = "companyId")
     private Company company;
 
     @OneToMany(mappedBy = "user")
-    public Set<Message> messagesrecieved = new HashSet<>();
+    public Set<Message> Recievedmessages = new HashSet<>();
 
 
 
@@ -28,31 +28,31 @@ public class User {
     public User() {
     }
 
-    public User(int userid, String name, String email, String password, boolean role, Company company, Set<Message> messagesrecieved) {
-        this.userid = userid;
+    public User(int userId, String name, String email, String password, boolean role, Company company, Set<Message> recievedmessages) {
+        this.userId = userId;
         this.name = name;
         this.email = email;
         this.password = password;
         this.role = role;
         this.company = company;
-        this.messagesrecieved = messagesrecieved;
+        Recievedmessages = recievedmessages;
     }
 
-    public User(String name, String email, String password, boolean role, Company company, Set<Message> messagesrecieved) {
+    public User(String name, String email, String password, boolean role, Company company, Set<Message> recievedmessages) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.role = role;
         this.company = company;
-        this.messagesrecieved = messagesrecieved;
+        Recievedmessages = recievedmessages;
     }
 
-    public int getUserid() {
-        return userid;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUserid(int userid) {
-        this.userid = userid;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getName() {
@@ -95,24 +95,24 @@ public class User {
         this.company = company;
     }
 
-    public Set<Message> getMessagesrecieved() {
-        return messagesrecieved;
+    public Set<Message> getRecievedmessages() {
+        return Recievedmessages;
     }
 
-    public void setMessagesrecieved(Set<Message> messagesrecieved) {
-        this.messagesrecieved = messagesrecieved;
+    public void setRecievedmessages(Set<Message> recievedmessages) {
+        Recievedmessages = recievedmessages;
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "userid=" + userid +
+                "userId=" + userId +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", role=" + role +
                 ", company=" + company +
-                ", messagesrecieved=" + messagesrecieved +
+                ", Recievedmessages=" + Recievedmessages +
                 '}';
     }
 }

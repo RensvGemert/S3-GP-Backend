@@ -11,12 +11,12 @@ public class Company
 {
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int companyid;
-    public String companyname;
-    public String companydiscription;
-    public byte companyrole;
-    public LocalDateTime createdat;
-    public LocalDateTime updatedat;
+    public int companyId;
+    public String companyName;
+    public String companyDiscription;
+    public byte companyRole;
+    public LocalDateTime createdAt;
+    public LocalDateTime updatedAt;
     @OneToMany(mappedBy = "company")
     public Set<Product> products = new HashSet<>();
     @OneToMany(mappedBy = "company")
@@ -29,72 +29,74 @@ public class Company
 
     }
 
-    public Company(int companyid, String companyname, String companydiscription, byte companyrole, LocalDateTime createdat, LocalDateTime updatedat, Set<Product> products, Set<User> users) {
-        this.companyid = companyid;
-        this.companyname = companyname;
-        this.companydiscription = companydiscription;
-        this.companyrole = companyrole;
-        this.createdat = createdat;
-        this.updatedat = updatedat;
+    public Company(int companyId, String companyName, String companyDiscription, byte companyRole, LocalDateTime createdAt, LocalDateTime updatedAt, Set<Product> products, Set<User> users) {
+        this.companyId = companyId;
+        this.companyName = companyName;
+        this.companyDiscription = companyDiscription;
+        this.companyRole = companyRole;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
         this.products = products;
         this.users = users;
     }
-    public Company(String companyname, String companydiscription, byte companyrole, LocalDateTime createdat, LocalDateTime updatedat) {
 
-        this.companyname = companyname;
-        this.companydiscription = companydiscription;
-        this.companyrole = companyrole;
-        this.createdat = createdat;
-        this.updatedat = updatedat;
+    public Company(String companyName, String companyDiscription, byte companyRole, LocalDateTime createdAt, LocalDateTime updatedAt, Set<Product> products, Set<User> users) {
 
+        this.companyName = companyName;
+        this.companyDiscription = companyDiscription;
+        this.companyRole = companyRole;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.products = products;
+        this.users = users;
     }
 
-    public int getCompanyid() {
-        return companyid;
+    public int getCompanyId() {
+        return companyId;
     }
 
-    public void setCompanyid(int companyid) {
-        this.companyid = companyid;
+    public void setCompanyId(int companyId) {
+        this.companyId = companyId;
     }
 
-    public String getCompanyname() {
-        return companyname;
+    public String getCompanyName() {
+        return companyName;
     }
 
-    public void setCompanyname(String companyname) {
-        this.companyname = companyname;
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 
-    public String getCompanydiscription() {
-        return companydiscription;
+    public String getCompanyDiscription() {
+        return companyDiscription;
     }
 
-    public void setCompanydiscription(String companydiscription) {
-        this.companydiscription = companydiscription;
+    public void setCompanyDiscription(String companyDiscription) {
+        this.companyDiscription = companyDiscription;
     }
 
-    public byte getCompanyrole() {
-        return companyrole;
+    public byte getCompanyRole() {
+        return companyRole;
     }
 
-    public void setCompanyrole(byte companyrole) {
-        this.companyrole = companyrole;
+    public void setCompanyRole(byte companyRole) {
+        this.companyRole = companyRole;
     }
 
-    public LocalDateTime getCreatedat() {
-        return createdat;
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreatedat(LocalDateTime createdat) {
-        this.createdat = createdat;
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public LocalDateTime getUpdatedat() {
-        return updatedat;
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
     }
 
-    public void setUpdatedat(LocalDateTime updatedat) {
-        this.updatedat = updatedat;
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public Set<Product> getProducts() {
@@ -116,12 +118,12 @@ public class Company
     @Override
     public String toString() {
         return "Company{" +
-                "companyid=" + companyid +
-                ", companyname='" + companyname + '\'' +
-                ", companydiscription='" + companydiscription + '\'' +
-                ", companyrole=" + companyrole +
-                ", createdat=" + createdat +
-                ", updatedat=" + updatedat +
+                "companyId=" + companyId +
+                ", companyName='" + companyName + '\'' +
+                ", companyDiscription='" + companyDiscription + '\'' +
+                ", companyRole=" + companyRole +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
                 ", products=" + products +
                 ", users=" + users +
                 '}';

@@ -9,15 +9,15 @@ import java.io.Serializable;
 @Embeddable
 public class MessageRecipientKey implements Serializable
 {
-    @Column(name = "userid")
-    public int userid;
+    @Column(name = "userId")
+    public int userId;
 
-    @Column(name = "messageid")
-    public int messageid;
+    @Column(name = "messageId")
+    public int messageId;
 
     public MessageRecipientKey(int userid, int messageid) {
-        this.userid = userid;
-        this.messageid = messageid;
+        this.userId = userid;
+        this.messageId = messageid;
     }
 
     public MessageRecipientKey(){
@@ -25,20 +25,27 @@ public class MessageRecipientKey implements Serializable
     }
 
 
-
-    public int getUserid() {
-        return userid;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUserid(int userid) {
-        this.userid = userid;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-    public int getMessageid() {
-        return messageid;
+    public int getMessageId() {
+        return messageId;
     }
 
-    public void setMessageid(int messageid) {
-        this.messageid = messageid;
+    public void setMessageId(int messageId) {
+        this.messageId = messageId;
+    }
+
+    @Override
+    public String toString() {
+        return "MessageRecipientKey{" +
+                "userId=" + userId +
+                ", messageId=" + messageId +
+                '}';
     }
 }

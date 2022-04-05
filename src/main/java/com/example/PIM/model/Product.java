@@ -8,124 +8,108 @@ import java.time.LocalDateTime;
 public class Product {
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int productid;
-    public String producttitle;
-    public String productdescription;
-    public int productprice;
-    public int productdiscount;
-    public String productimage;
-    public LocalDateTime createdat;
-    public LocalDateTime updatedat;
+    public int productId;
+    public String productTitle;
+    public String productDescription;
+    public int productPrice;
+    public int productDiscount;
+    public String productImage;
+    public LocalDateTime createdAt;
+    public LocalDateTime updatedAt;
 
 
     @ManyToOne
-    @JoinColumn(name = "companyid")
+    @JoinColumn(name = "companyId")
     private Company company;
 
     public Product() {
     }
 
-    public Product(int productid, String producttitle, String productdescription, int productprice, int productdiscount, String productimage, LocalDateTime createdat, LocalDateTime updatedat, Company company) {
-        this.productid = productid;
-        this.producttitle = producttitle;
-        this.productdescription = productdescription;
-        this.productprice = productprice;
-        this.productdiscount = productdiscount;
-        this.productimage = productimage;
-        this.createdat = createdat;
-        this.updatedat = updatedat;
+    public Product(int productId, String productTitle, String productDescription, int productPrice, int productDiscount, String productImage, LocalDateTime createdAt, LocalDateTime updatedAt, Company company) {
+        this.productId = productId;
+        this.productTitle = productTitle;
+        this.productDescription = productDescription;
+        this.productPrice = productPrice;
+        this.productDiscount = productDiscount;
+        this.productImage = productImage;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
         this.company = company;
     }
 
-    public Product(String producttitle, String productdescription, int productprice, int productdiscount, String productimage, LocalDateTime createdat, LocalDateTime updatedat, Company company) {
-        this.productid = productid;
-        this.producttitle = producttitle;
-        this.productdescription = productdescription;
-        this.productprice = productprice;
-        this.productdiscount = productdiscount;
-        this.productimage = productimage;
-        this.createdat = createdat;
-        this.updatedat = updatedat;
+    public Product(String productTitle, String productDescription, int productPrice, int productDiscount, String productImage, LocalDateTime createdAt, LocalDateTime updatedAt, Company company) {
+        this.productTitle = productTitle;
+        this.productDescription = productDescription;
+        this.productPrice = productPrice;
+        this.productDiscount = productDiscount;
+        this.productImage = productImage;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
         this.company = company;
     }
 
-    @Override
-    public String toString() {
-        return "Product{" +
-                "productid=" + productid +
-                ", producttitle='" + producttitle + '\'' +
-                ", productdescription='" + productdescription + '\'' +
-                ", productprice=" + productprice +
-                ", productdiscount=" + productdiscount +
-                ", productimage='" + productimage + '\'' +
-                ", createdat=" + createdat +
-                ", updatedat=" + updatedat +
-                ", company=" + company +
-                '}';
+    public int getProductId() {
+        return productId;
     }
 
-    public int getProductid() {
-        return productid;
+    public void setProductId(int productId) {
+        this.productId = productId;
     }
 
-    public void setProductid(int productid) {
-        this.productid = productid;
+    public String getProductTitle() {
+        return productTitle;
     }
 
-    public String getProducttitle() {
-        return producttitle;
+    public void setProductTitle(String productTitle) {
+        this.productTitle = productTitle;
     }
 
-    public void setProducttitle(String producttitle) {
-        this.producttitle = producttitle;
+    public String getProductDescription() {
+        return productDescription;
     }
 
-    public String getProductdescription() {
-        return productdescription;
+    public void setProductDescription(String productDescription) {
+        this.productDescription = productDescription;
     }
 
-    public void setProductdescription(String productdescription) {
-        this.productdescription = productdescription;
+    public int getProductPrice() {
+        return productPrice;
     }
 
-    public int getProductprice() {
-        return productprice;
+    public void setProductPrice(int productPrice) {
+        this.productPrice = productPrice;
     }
 
-    public void setProductprice(int productprice) {
-        this.productprice = productprice;
+    public int getProductDiscount() {
+        return productDiscount;
     }
 
-    public int getProductdiscount() {
-        return productdiscount;
+    public void setProductDiscount(int productDiscount) {
+        this.productDiscount = productDiscount;
     }
 
-    public void setProductdiscount(int productdiscount) {
-        this.productdiscount = productdiscount;
+    public String getProductImage() {
+        return productImage;
     }
 
-    public String getProductimage() {
-        return productimage;
+    public void setProductImage(String productImage) {
+        this.productImage = productImage;
     }
 
-    public void setProductimage(String productimage) {
-        this.productimage = productimage;
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
-    public LocalDateTime getCreatedat() {
-        return createdat;
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public void setCreatedat(LocalDateTime createdat) {
-        this.createdat = createdat;
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
     }
 
-    public LocalDateTime getUpdatedat() {
-        return updatedat;
-    }
-
-    public void setUpdatedat(LocalDateTime updatedat) {
-        this.updatedat = updatedat;
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public Company getCompany() {
@@ -134,5 +118,20 @@ public class Product {
 
     public void setCompany(Company company) {
         this.company = company;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "productId=" + productId +
+                ", productTitle='" + productTitle + '\'' +
+                ", productDescription='" + productDescription + '\'' +
+                ", productPrice=" + productPrice +
+                ", productDiscount=" + productDiscount +
+                ", productImage='" + productImage + '\'' +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", company=" + company +
+                '}';
     }
 }
