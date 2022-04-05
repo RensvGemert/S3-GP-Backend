@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 public class Product {
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     public int productId;
     public String productTitle;
     public String productDescription;
@@ -21,6 +22,7 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "companyId")
     private Company company;
+
 
     public Product() {
     }
@@ -54,22 +56,27 @@ public class Product {
 
     public void setProductId(int productId) {
         this.productId = productId;
+
     }
 
-    public String getProductTitle() {
-        return productTitle;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setProductTitle(String productTitle) {
-        this.productTitle = productTitle;
+    public String getTitle() {
+        return title;
     }
 
-    public String getProductDescription() {
-        return productDescription;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public void setProductDescription(String productDescription) {
-        this.productDescription = productDescription;
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public int getProductPrice() {
@@ -132,6 +139,7 @@ public class Product {
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 ", company=" + company +
+
                 '}';
     }
 }
