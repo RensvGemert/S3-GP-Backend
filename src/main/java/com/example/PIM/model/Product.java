@@ -17,6 +17,11 @@ public class Product {
     public Product() {
     }
 
+    public Product(String title, String description) {
+        this.title = title;
+        this.description = description;
+    }
+
     public Product(Integer id, String title, String description) {
         this.id = id;
         this.title = title;

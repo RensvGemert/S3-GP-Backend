@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RestController
 @RequestMapping("/api/products")
 public class ProductController {
@@ -25,23 +25,23 @@ public class ProductController {
         return productService.getProducts();
     }
 
-    @PostMapping("/create")
+    @PostMapping
 	public void createProduct(@RequestBody Product product) {
         productService.createProduct(product);
     }
 
-    @DeleteMapping("/{Id}")
-	public void deleteProduct(@PathVariable("Id") int Id) {
-        productService.deleteProduct(Id);
+    @DeleteMapping("/{id}")
+	public void deleteProduct(@PathVariable("id") int id) {
+        productService.deleteProduct(id);
     }
 
-    @GetMapping("/{Id}")
-    public Optional<Product> getProductsById(@PathVariable int Id) {
-        return productService.getProductById(Id);
+    @GetMapping("/{id}")
+    public Optional<Product> getProductsById(@PathVariable int id) {
+        return productService.getProductById(id);
     }
 
-    @PutMapping("/{Id}")
-    public void updateProduct(@PathVariable("Id") int id, @RequestBody Product product) {
+    @PutMapping("/{id}")
+    public void updateProduct(@PathVariable("id") int id, @RequestBody Product product) {
         productService.updateProduct(id, product.title, product.description);
     }
 }

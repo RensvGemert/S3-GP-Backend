@@ -24,8 +24,8 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public Optional<Product> getProductById(int Id){
-        return productRepository.findById(Id);
+    public Optional<Product> getProductById(int id){
+        return productRepository.findById(id);
     }
 
     public void createProduct(Product product){
@@ -33,18 +33,18 @@ public class ProductService {
             productRepository.save(product);
         }
     }
-    public void deleteProduct(int productId){
-        boolean exists = productRepository.existsById(productId);
+    public void deleteProduct(int productid){
+        boolean exists = productRepository.existsById(productid);
         if(!exists){
-            throw new IllegalStateException("Product with id: " + productId + " does not exist");
+            throw new IllegalStateException("Product with id: " + productid + " does not exist");
         }
-        productRepository.deleteById(productId);
+        productRepository.deleteById(productid);
     }
 
     @Transactional
-    public void updateProduct(int Id, String Title, String Description) {
-        Product product = productRepository.findById(Id)
-                .orElseThrow(() -> new IllegalStateException("product with id: " + Id + " not found!"));
+    public void updateProduct(int id, String Title, String Description) {
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new IllegalStateException("product with id: " + id + " not found!"));
         if(Title != null &&
             Title.length() > 0 &&
             !Objects.equals(product.getTitle(), Title)) {
