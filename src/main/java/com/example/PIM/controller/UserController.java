@@ -3,10 +3,7 @@ package com.example.PIM.controller;
 import com.example.PIM.model.User;
 import com.example.PIM.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,5 +22,11 @@ public class UserController {
     @GetMapping
     public List<User> getUsers(){
         return userService.getUsers();
+    }
+
+    @PostMapping(value = "/create")
+    public void createUser(@RequestBody User newUser)
+    {
+        userService.createUser(newUser);
     }
 }

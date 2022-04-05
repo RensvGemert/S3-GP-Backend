@@ -19,5 +19,13 @@ public class UserService {
 
     public List<User> getUsers(){
         return userRepository.findAll();
+
     }
+
+    public void createUser(User newUser)
+    {
+        this.userRepository.save(newUser);
+    }
+
+
 }

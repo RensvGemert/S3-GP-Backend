@@ -1,32 +1,58 @@
 package com.example.PIM.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "User")
 public class User {
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer id;
+    public int userId;
     public String name;
     @Column(unique=true)
     public String email;
+    public String password;
+    public boolean role;
+    @ManyToOne
+    @JoinColumn(name = "companyId")
+    private Company company;
+
+    @OneToMany(mappedBy = "user")
+    public Set<Message> Recievedmessages = new HashSet<>();
+
+
+
 
     public User() {
     }
 
-    public User(Integer id, String name, String email) {
-        this.id = id;
+    public User(int userId, String name, String email, String password, boolean role, Company company, Set<Message> recievedmessages) {
+        this.userId = userId;
         this.name = name;
         this.email = email;
+        this.password = password;
+        this.role = role;
+        this.company = company;
+        Recievedmessages = recievedmessages;
     }
 
-    public Integer getId() {
-        return id;
+    public User(String name, String email, String password, boolean role, Company company, Set<Message> recievedmessages) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.company = company;
+        Recievedmessages = recievedmessages;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getName() {
@@ -45,12 +71,48 @@ public class User {
         this.email = email;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public boolean isRole() {
+        return role;
+    }
+
+    public void setRole(boolean role) {
+        this.role = role;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    public Set<Message> getRecievedmessages() {
+        return Recievedmessages;
+    }
+
+    public void setRecievedmessages(Set<Message> recievedmessages) {
+        Recievedmessages = recievedmessages;
+    }
+
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
+                "userId=" + userId +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", role=" + role +
+                ", company=" + company +
+                ", Recievedmessages=" + Recievedmessages +
                 '}';
     }
 }
