@@ -1,6 +1,7 @@
 package com.example.PIM.model;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -12,7 +13,7 @@ public class Product {
     public int id;
     public String title;
     public String description;
-    public int price;
+    public BigDecimal price;
     public int discount;
     public String image;
     public LocalDateTime createdAt;
@@ -27,7 +28,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(int id, String title, String description, int price, int discount, String image, LocalDateTime createdAt, LocalDateTime updatedAt, Company company) {
+    public Product(int id, String title, String description, BigDecimal price, int discount, String image, LocalDateTime createdAt, LocalDateTime updatedAt, Company company) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -39,7 +40,7 @@ public class Product {
         this.company = company;
     }
 
-    public Product(String title, String description, int price, int discount, String image, LocalDateTime createdAt, LocalDateTime updatedAt, Company company) {
+    public Product(String title, String description, BigDecimal price, int discount, String image, LocalDateTime createdAt, LocalDateTime updatedAt, Company company) {
         this.title = title;
         this.description = description;
         this.price = price;
@@ -74,11 +75,11 @@ public class Product {
         this.description = description;
     }
 
-    public int getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
