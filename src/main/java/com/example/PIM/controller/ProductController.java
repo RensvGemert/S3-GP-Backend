@@ -47,7 +47,9 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    public void updateProduct(@PathVariable("id") int id, @RequestBody Product product) {
+    public ResponseEntity<String> updateProduct(@PathVariable("id") int id, @RequestBody Product product) {
         productService.updateProduct(id, product.getTitle(), product.getDescription(), product.getPrice(), product.getDiscount(), product.getImage());
+        return ResponseEntity.status(HttpStatus.OK)
+                .body("{ \"id\": "+ id + " }");
     }
 }
