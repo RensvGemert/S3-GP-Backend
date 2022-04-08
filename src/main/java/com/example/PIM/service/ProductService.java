@@ -29,7 +29,7 @@ public class ProductService {
     }
 
     public void createProduct(Product product){
-        if(product.title != "" || product.description != "") {
+        if(product.getTitle() != "" || product.getDescription()!= "") {
             productRepository.save(product);
         }
     }

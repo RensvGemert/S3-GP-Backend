@@ -9,12 +9,12 @@ public class Product {
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    public int productId;
-    public String productTitle;
-    public String productDescription;
-    public int productPrice;
-    public int productDiscount;
-    public String productImage;
+    public int id;
+    public String title;
+    public String description;
+    public int price;
+    public int discount;
+    public String image;
     public LocalDateTime createdAt;
     public LocalDateTime updatedAt;
 
@@ -27,36 +27,31 @@ public class Product {
     public Product() {
     }
 
-    public Product(int productId, String productTitle, String productDescription, int productPrice, int productDiscount, String productImage, LocalDateTime createdAt, LocalDateTime updatedAt, Company company) {
-        this.productId = productId;
-        this.productTitle = productTitle;
-        this.productDescription = productDescription;
-        this.productPrice = productPrice;
-        this.productDiscount = productDiscount;
-        this.productImage = productImage;
+    public Product(int id, String title, String description, int price, int discount, String image, LocalDateTime createdAt, LocalDateTime updatedAt, Company company) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.price = price;
+        this.discount = discount;
+        this.image = image;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.company = company;
     }
 
-    public Product(String productTitle, String productDescription, int productPrice, int productDiscount, String productImage, LocalDateTime createdAt, LocalDateTime updatedAt, Company company) {
-        this.productTitle = productTitle;
-        this.productDescription = productDescription;
-        this.productPrice = productPrice;
-        this.productDiscount = productDiscount;
-        this.productImage = productImage;
+    public Product(String title, String description, int price, int discount, String image, LocalDateTime createdAt, LocalDateTime updatedAt, Company company) {
+        this.title = title;
+        this.description = description;
+        this.price = price;
+        this.discount = discount;
+        this.image = image;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.company = company;
     }
 
-    public int getProductId() {
-        return productId;
-    }
-
-    public void setProductId(int productId) {
-        this.productId = productId;
-
+    public int getId() {
+        return id;
     }
 
     public void setId(int id) {
@@ -79,28 +74,28 @@ public class Product {
         this.description = description;
     }
 
-    public int getProductPrice() {
-        return productPrice;
+    public int getPrice() {
+        return price;
     }
 
-    public void setProductPrice(int productPrice) {
-        this.productPrice = productPrice;
+    public void setPrice(int price) {
+        this.price = price;
     }
 
-    public int getProductDiscount() {
-        return productDiscount;
+    public int getDiscount() {
+        return discount;
     }
 
-    public void setProductDiscount(int productDiscount) {
-        this.productDiscount = productDiscount;
+    public void setDiscount(int discount) {
+        this.discount = discount;
     }
 
-    public String getProductImage() {
-        return productImage;
+    public String getImage() {
+        return image;
     }
 
-    public void setProductImage(String productImage) {
-        this.productImage = productImage;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -130,16 +125,15 @@ public class Product {
     @Override
     public String toString() {
         return "Product{" +
-                "productId=" + productId +
-                ", productTitle='" + productTitle + '\'' +
-                ", productDescription='" + productDescription + '\'' +
-                ", productPrice=" + productPrice +
-                ", productDiscount=" + productDiscount +
-                ", productImage='" + productImage + '\'' +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", discount=" + discount +
+                ", image='" + image + '\'' +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 ", company=" + company +
-
                 '}';
     }
 }

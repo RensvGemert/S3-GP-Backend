@@ -31,7 +31,7 @@ public class ProductController {
     public ResponseEntity<String> createProduct(@RequestBody Product product) {
         productService.createProduct(product);
         return ResponseEntity.status(HttpStatus.OK)
-                .body("{ \"id\": "+ product.id + " }");
+                .body("{ \"id\": "+ product.getId() + " }");
     }
 
     @DeleteMapping("/{id}")
@@ -48,6 +48,6 @@ public class ProductController {
 
     @PutMapping("/{id}")
     public void updateProduct(@PathVariable("id") int id, @RequestBody Product product) {
-        productService.updateProduct(id, product.title, product.description);
+        productService.updateProduct(id, product.getTitle(), product.getDescription());
     }
 }
