@@ -1,2 +1,5 @@
-package com.example.PIM.model;public class ProductFieldKey {
+package com.example.PIM.model;
+
+public class ProductFieldKey {
+    public int Id;
 }
