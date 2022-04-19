@@ -11,9 +11,9 @@ public class Company
 {
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int companyId;
+    public int id;
     public String companyName;
-    public String companyDiscription;
+    public String companyDescription;
     public byte companyRole;
     public LocalDateTime createdAt;
     public LocalDateTime updatedAt;
@@ -29,10 +29,10 @@ public class Company
 
     }
 
-    public Company(int companyId, String companyName, String companyDiscription, byte companyRole, LocalDateTime createdAt, LocalDateTime updatedAt, Set<Product> products, Set<User> users) {
-        this.companyId = companyId;
+    public Company(int companyId, String companyName, String companyDescription, byte companyRole, LocalDateTime createdAt, LocalDateTime updatedAt, Set<Product> products, Set<User> users) {
+        this.id = companyId;
         this.companyName = companyName;
-        this.companyDiscription = companyDiscription;
+        this.companyDescription = companyDescription;
         this.companyRole = companyRole;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -43,7 +43,7 @@ public class Company
     public Company(String companyName, String companyDiscription, byte companyRole, LocalDateTime createdAt, LocalDateTime updatedAt, Set<Product> products, Set<User> users) {
 
         this.companyName = companyName;
-        this.companyDiscription = companyDiscription;
+        this.companyDescription = companyDiscription;
         this.companyRole = companyRole;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -52,11 +52,11 @@ public class Company
     }
 
     public int getCompanyId() {
-        return companyId;
+        return id;
     }
 
     public void setCompanyId(int companyId) {
-        this.companyId = companyId;
+        this.id = companyId;
     }
 
     public String getCompanyName() {
@@ -68,11 +68,11 @@ public class Company
     }
 
     public String getCompanyDiscription() {
-        return companyDiscription;
+        return companyDescription;
     }
 
     public void setCompanyDiscription(String companyDiscription) {
-        this.companyDiscription = companyDiscription;
+        this.companyDescription = companyDescription;
     }
 
     public byte getCompanyRole() {
@@ -118,9 +118,9 @@ public class Company
     @Override
     public String toString() {
         return "Company{" +
-                "companyId=" + companyId +
+                "companyId=" + id +
                 ", companyName='" + companyName + '\'' +
-                ", companyDiscription='" + companyDiscription + '\'' +
+                ", companyDescription='" + companyDescription + '\'' +
                 ", companyRole=" + companyRole +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +

@@ -21,7 +21,7 @@ public class Product {
 
 
     @ManyToOne
-    @JoinColumn(name = "companyId")
+    @JoinColumn(name = "companyId", referencedColumnName = "id")
     private Company company;
 
 
