@@ -1,5 +1,7 @@
 package com.example.PIM.controller;
 
+import com.example.PIM.Dtos.ProductDto;
+import com.example.PIM.Dtos.ProductFieldDto;
 import com.example.PIM.model.Product;
 import com.example.PIM.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +25,12 @@ public class ProductController {
     }
 
     @GetMapping
-    public List<Product> getProducts(){
+    public List<ProductDto> getProducts(){
         return productService.getProducts();
     }
 
     @PostMapping
-    public ResponseEntity<String> createProduct(@RequestBody Product product) {
+    public ResponseEntity<String> createProduct(@RequestBody ProductDto product) {
         productService.createProduct(product);
         return ResponseEntity.status(HttpStatus.OK)
                 .body("{ \"id\": "+ product.getId() + " }");
@@ -43,6 +45,7 @@ public class ProductController {
 
     @GetMapping("/{id}")
     public Optional<Product> getProductsById(@PathVariable int id) {
+
         return productService.getProductById(id);
     }
 
@@ -51,5 +54,11 @@ public class ProductController {
         productService.updateProduct(id, product.getTitle(), product.getDescription(), product.getPrice(), product.getDiscount(), product.getImage());
         return ResponseEntity.status(HttpStatus.OK)
                 .body("{ \"id\": "+ id + " }");
+    }
+
+    @GetMapping("/fields/{id}")
+    public List<ProductFieldDto> getAllProductFieldsFromProduct(@PathVariable("id") int id)
+    {
+        return productService.SelectAllProductFieldsFromProduct(id);
     }
 }
