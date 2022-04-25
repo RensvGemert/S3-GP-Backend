@@ -9,27 +9,29 @@ import java.util.Set;
 public class User {
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int userId;
+    public int id;
     public String name;
     @Column(unique=true)
     public String email;
     public String password;
     public boolean role;
-    @ManyToOne
+    /*@ManyToOne
     @JoinColumn(name = "companyId")
-    private Company company;
+    private Company company;*/
 
     @OneToMany(mappedBy = "user")
     public Set<Message> Recievedmessages = new HashSet<>();
 
-
+    @ManyToOne
+    @JoinColumn(name = "companyId", referencedColumnName = "id")
+    private Company company;
 
 
     public User() {
     }
 
-    public User(int userId, String name, String email, String password, boolean role, Company company, Set<Message> recievedmessages) {
-        this.userId = userId;
+    public User(int id, String name, String email, String password, boolean role, Company company, Set<Message> recievedmessages) {
+        this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
@@ -47,12 +49,16 @@ public class User {
         Recievedmessages = recievedmessages;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public int getUserId() {
-        return userId;
+        return id;
     }
 
     public void setUserId(int userId) {
-        this.userId = userId;
+        this.id = userId;
     }
 
     public String getName() {
@@ -106,7 +112,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "userId=" + userId +
+                "userId=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
