@@ -1,6 +1,7 @@
 package com.example.PIM.controller;
 import com.example.PIM.model.Company;
 import com.example.PIM.model.Product;
+import com.example.PIM.model.User;
 import com.example.PIM.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,7 +23,7 @@ public class CompanyController {
     }
 
     @GetMapping
-    public List<Company> getUsers(){
+    public List<Company> getCompanies(){
         return companyService.getCompanies();
     }
 
@@ -36,5 +37,19 @@ public class CompanyController {
     @GetMapping("/{id}")
     public Optional<Company> getCompanyById(@PathVariable int id) {
         return companyService.getCompanyById(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteCompany(@PathVariable("id") int id) {
+        companyService.deleteCompany(id);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body("{ \"id\": "+ id + " }");
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<String> updateCompany(@PathVariable("id") int id, @RequestBody Company company) {
+        companyService.updateCompany(id, company.getCompanyName(), company.getCompanyDescription(), company.isRole());
+        return ResponseEntity.status(HttpStatus.OK)
+                .body("{ \"id\": "+ id + " }");
     }
 }

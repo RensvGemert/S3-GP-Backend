@@ -12,9 +12,9 @@ public class Company
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int id;
-    public String companyName;
-    public String companyDescription;
-    public byte companyRole;
+    public String name;
+    public String description;
+    public boolean role;
     public LocalDateTime createdAt;
     public LocalDateTime updatedAt;
     @OneToMany(mappedBy = "company")
@@ -31,20 +31,20 @@ public class Company
 
     public Company(int companyId, String companyName, String companyDescription, byte companyRole, LocalDateTime createdAt, LocalDateTime updatedAt, Set<Product> products, Set<User> users) {
         this.id = companyId;
-        this.companyName = companyName;
-        this.companyDescription = companyDescription;
-        this.companyRole = companyRole;
+        this.name = companyName;
+        this.description = companyDescription;
+        this.role = role;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.products = products;
         this.users = users;
     }
 
-    public Company(String companyName, String companyDiscription, byte companyRole, LocalDateTime createdAt, LocalDateTime updatedAt, Set<Product> products, Set<User> users) {
+    public Company(String name, String description, byte companyRole, LocalDateTime createdAt, LocalDateTime updatedAt, Set<Product> products, Set<User> users) {
 
-        this.companyName = companyName;
-        this.companyDescription = companyDiscription;
-        this.companyRole = companyRole;
+        this.name = name;
+        this.description = description;
+        this.role = role;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.products = products;
@@ -60,27 +60,31 @@ public class Company
     }
 
     public String getCompanyName() {
-        return companyName;
+        return name;
     }
 
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
+    public void setCompanyName(String name) {
+        this.name = name;
     }
 
-    public String getCompanyDiscription() {
-        return companyDescription;
+    public String getCompanyDescription() {
+        return description;
     }
 
-    public void setCompanyDiscription(String companyDiscription) {
-        this.companyDescription = companyDescription;
+    public void setCompanyDescription(String description) {
+        this.description = description;
     }
 
-    public byte getCompanyRole() {
-        return companyRole;
+    public boolean isRole() {
+        return role;
     }
 
-    public void setCompanyRole(byte companyRole) {
-        this.companyRole = companyRole;
+    public void setRole(boolean role) {
+        this.role = role;
+    }
+
+    public void setCompanyRole(boolean role) {
+        this.role = role;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -119,9 +123,9 @@ public class Company
     public String toString() {
         return "Company{" +
                 "companyId=" + id +
-                ", companyName='" + companyName + '\'' +
-                ", companyDescription='" + companyDescription + '\'' +
-                ", companyRole=" + companyRole +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", role=" + role +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 ", products=" + products +
