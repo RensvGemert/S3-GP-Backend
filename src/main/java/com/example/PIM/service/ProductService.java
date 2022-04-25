@@ -34,6 +34,12 @@ public class ProductService {
         this.FieldRepository = fieldRepo;
     }
 
+    public void deleteFieldFromProduct(int productFieldId, int productId)
+    {
+        System.out.println(productFieldId + ":fieldid" + productId);
+        this.productFieldRepository.deleteProductFieldFromProduct(productFieldId, productId);
+    }
+
     public List<ProductDto> getProducts(){
 
         List<ProductDto> dtos = new ArrayList<ProductDto>();
@@ -79,6 +85,11 @@ public class ProductService {
         boolean exists = productRepository.existsById(productid);
         if(!exists){
             throw new IllegalStateException("Product with id: " + productid + " does not exist");
+        }
+
+        for(ProductField pf : productFieldRepository.selectAllProductFieldsFromProduct(productid))
+        {
+            productFieldRepository.delete(pf);
         }
         productRepository.deleteById(productid);
     }

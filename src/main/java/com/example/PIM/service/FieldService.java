@@ -5,6 +5,8 @@ import com.example.PIM.repositories.IFieldRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class FieldService {
 
@@ -17,8 +19,13 @@ public class FieldService {
 
     public void createField(Field field){
         if(field.getName() != "") {
-            fieldRepo.save(field);
+            this.fieldRepo.save(field);
         }
+    }
+
+    public List<Field> selectAllFields()
+    {
+        return this.fieldRepo.findAll();
     }
 
 

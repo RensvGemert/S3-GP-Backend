@@ -19,7 +19,6 @@ public class Product {
     public LocalDateTime createdAt;
     public LocalDateTime updatedAt;
 
-
     @ManyToOne
     @JoinColumn(name = "companyId")
     private Company company;

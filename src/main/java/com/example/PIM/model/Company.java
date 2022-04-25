@@ -17,9 +17,9 @@ public class Company
     public byte companyRole;
     public LocalDateTime createdAt;
     public LocalDateTime updatedAt;
-    @OneToMany(mappedBy = "company")
+    @OneToMany(mappedBy = "company", orphanRemoval = true)
     public Set<Product> products = new HashSet<>();
-    @OneToMany(mappedBy = "company")
+    @OneToMany(mappedBy = "company", orphanRemoval = true)
     public Set<User> users = new HashSet<>();
 
 
