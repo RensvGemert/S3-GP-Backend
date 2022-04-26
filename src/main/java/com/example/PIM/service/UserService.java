@@ -34,9 +34,9 @@ public class UserService {
     }
 
     public void createUser(User user){
-        if(user.getName() != "" || user.getEmail()!= "" || user.getCompany() != null) {
-            Company c = companyRepository.getById(user.getCompany().getCompanyId());
-            user.setCompany(c);
+        if(user.getName() != "" || user.getEmail()!= "" || user.getCompanyId() != 0) {
+            /*Company c = companyRepository.getById(user.getCompany().getCompanyId());
+            user.setCompany(c);*/
             userRepository.save(user);
         }
     }
@@ -49,7 +49,7 @@ public class UserService {
     }
 
     @Transactional
-    public void updateUser(int id, String Name, String Email, String Password, boolean role) {
+    public void updateUser(int id, String Name, String Email, String Password, int role) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new IllegalStateException("product with id: " + id + " not found!"));
         if(Name != null &&
@@ -66,7 +66,8 @@ public class UserService {
                 !Objects.equals(user.getPassword(), Password)) {
             user.setPassword(Password);
         }
-        if(!Objects.equals(user.isRole(), role)) {
+        if(role != 0 &&
+                !Objects.equals(user.getRole(), role)) {
             user.setRole(role);
         }
     }

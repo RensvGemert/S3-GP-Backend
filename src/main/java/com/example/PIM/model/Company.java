@@ -19,7 +19,7 @@ public class Company
     public LocalDateTime updatedAt;
     @OneToMany(mappedBy = "company")
     public Set<Product> products = new HashSet<>();
-    @OneToMany(mappedBy = "company")
+    @OneToMany(mappedBy = "companyId")
     public Set<User> users = new HashSet<>();
 
 
@@ -51,27 +51,27 @@ public class Company
         this.users = users;
     }
 
-    public int getCompanyId() {
+    public int getId() {
         return id;
     }
 
-    public void setCompanyId(int companyId) {
-        this.id = companyId;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getCompanyName() {
+    public String getName() {
         return name;
     }
 
-    public void setCompanyName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public String getCompanyDescription() {
+    public String getDescription() {
         return description;
     }
 
-    public void setCompanyDescription(String description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
@@ -80,10 +80,6 @@ public class Company
     }
 
     public void setRole(boolean role) {
-        this.role = role;
-    }
-
-    public void setCompanyRole(boolean role) {
         this.role = role;
     }
 

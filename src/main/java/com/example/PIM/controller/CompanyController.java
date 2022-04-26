@@ -31,7 +31,7 @@ public class CompanyController {
     public ResponseEntity<String> createCompany(@RequestBody Company company) {
         companyService.createCompany(company);
         return ResponseEntity.status(HttpStatus.OK)
-                .body("{ \"id\": "+ company.getCompanyId() + " }");
+                .body("{ \"id\": "+ company.getId() + " }");
     }
 
     @GetMapping("/{id}")
@@ -48,7 +48,7 @@ public class CompanyController {
 
     @PutMapping("/{id}")
     public ResponseEntity<String> updateCompany(@PathVariable("id") int id, @RequestBody Company company) {
-        companyService.updateCompany(id, company.getCompanyName(), company.getCompanyDescription(), company.isRole());
+        companyService.updateCompany(id, company.getName(), company.getDescription(), company.isRole());
         return ResponseEntity.status(HttpStatus.OK)
                 .body("{ \"id\": "+ id + " }");
     }

@@ -14,38 +14,35 @@ public class User {
     @Column(unique=true)
     public String email;
     public String password;
-    public boolean role;
-    /*@ManyToOne
-    @JoinColumn(name = "companyId")
-    private Company company;*/
+    public int role;
 
     @OneToMany(mappedBy = "user")
     public Set<Message> Recievedmessages = new HashSet<>();
 
-    @ManyToOne
-    @JoinColumn(name = "companyId", referencedColumnName = "id")
-    private Company company;
+    /*@ManyToOne
+    @JoinColumn(name = "companyId", referencedColumnName = "id")*/
+    public int companyId;
 
 
     public User() {
     }
 
-    public User(int id, String name, String email, String password, boolean role, Company company, Set<Message> recievedmessages) {
+    public User(int id, String name, String email, String password, int role, int companyId, Set<Message> recievedmessages) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
         this.role = role;
-        this.company = company;
+        this.companyId = companyId;
         Recievedmessages = recievedmessages;
     }
 
-    public User(String name, String email, String password, boolean role, Company company, Set<Message> recievedmessages) {
+    public User(String name, String email, String password, int role, int companyId, Set<Message> recievedmessages) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.role = role;
-        this.company = company;
+        this.companyId = companyId;
         Recievedmessages = recievedmessages;
     }
 
@@ -53,12 +50,8 @@ public class User {
         return id;
     }
 
-    public int getUserId() {
-        return id;
-    }
-
-    public void setUserId(int userId) {
-        this.id = userId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -85,20 +78,12 @@ public class User {
         this.password = password;
     }
 
-    public boolean isRole() {
+    public int getRole() {
         return role;
     }
 
-    public void setRole(boolean role) {
+    public void setRole(int role) {
         this.role = role;
-    }
-
-    public Company getCompany() {
-        return company;
-    }
-
-    public void setCompany(Company company) {
-        this.company = company;
     }
 
     public Set<Message> getRecievedmessages() {
@@ -109,6 +94,14 @@ public class User {
         Recievedmessages = recievedmessages;
     }
 
+    public int getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(int companyId) {
+        this.companyId = companyId;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -117,7 +110,7 @@ public class User {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", role=" + role +
-                ", company=" + company +
+                ", companyId=" + companyId +
                 ", Recievedmessages=" + Recievedmessages +
                 '}';
     }

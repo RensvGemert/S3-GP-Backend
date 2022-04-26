@@ -33,7 +33,7 @@ public class CompanyService {
     }
 
     public void createCompany(Company company){
-        if(company.getCompanyName() != "" || company.getCompanyDescription()!= "") {
+        if(company.getName() != "" || company.getDescription()!= "") {
             companyRepository.save(company);
         }
     }
@@ -53,13 +53,13 @@ public class CompanyService {
                 .orElseThrow(() -> new IllegalStateException("product with id: " + id + " not found!"));
         if(name != null &&
                 name.length() > 0 &&
-                !Objects.equals(company.getCompanyName(), name)) {
-            company.setCompanyName(name);
+                !Objects.equals(company.getName(), name)) {
+            company.setName(name);
         }
         if(description != null &&
                 description.length() > 0 &&
-                !Objects.equals(company.getCompanyDescription(), description)) {
-            company.setCompanyDescription(description);
+                !Objects.equals(company.getDescription(), description)) {
+            company.setDescription(description);
         }
         if(!Objects.equals(company.isRole(), companyRole)) {
             company.setRole(companyRole);
