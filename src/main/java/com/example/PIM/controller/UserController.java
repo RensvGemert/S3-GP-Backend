@@ -1,5 +1,6 @@
 package com.example.PIM.controller;
 
+import com.example.PIM.model.Authentication;
 import com.example.PIM.model.Product;
 import com.example.PIM.model.User;
 import com.example.PIM.service.UserService;
@@ -52,5 +53,11 @@ public class UserController {
         userService.updateUser(id, user.getName(), user.getEmail(), user.getPassword(), user.getRole());
         return ResponseEntity.status(HttpStatus.OK)
                 .body("{ \"id\": "+ id + " }");
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody Authentication authentication) {
+        int id = userService.login(authentication);
+        return ResponseEntity.status(HttpStatus.OK).body("{ \"id\": "+ id + " }");
     }
 }

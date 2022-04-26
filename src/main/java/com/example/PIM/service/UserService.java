@@ -1,5 +1,6 @@
 package com.example.PIM.service;
 
+import com.example.PIM.model.Authentication;
 import com.example.PIM.model.Company;
 import com.example.PIM.model.User;
 import com.example.PIM.repositories.ICompanyRepository;
@@ -70,5 +71,11 @@ public class UserService {
                 !Objects.equals(user.getRole(), role)) {
             user.setRole(role);
         }
+    }
+
+    public int login(Authentication authentication){
+        int id = userRepository.login(authentication.getEmail(), authentication.getPassword());
+
+        return id;
     }
 }
