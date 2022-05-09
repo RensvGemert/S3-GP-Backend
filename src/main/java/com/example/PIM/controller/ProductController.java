@@ -32,9 +32,9 @@ public class ProductController {
 
     @PostMapping
     public ResponseEntity<String> createProduct(@RequestBody ProductDto product) {
-        productService.createProduct(product);
+        Integer id = productService.createProduct(product);
         return ResponseEntity.status(HttpStatus.OK)
-                .body("{ \"id\": "+ product.getId() + " }");
+                .body("{ \"id\": "+ id + " }");
     }
 
     @DeleteMapping("/{id}")
@@ -54,14 +54,14 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Product> getProductsById(@PathVariable int id) {
+    public Optional<ProductDto> getProductsById(@PathVariable int id) {
 
         return productService.getProductById(id);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateProduct(@PathVariable("id") int id, @RequestBody Product product) {
-        productService.updateProduct(id, product.getTitle(), product.getDescription(), product.getPrice(), product.getDiscount(), product.getImage());
+    public ResponseEntity<String> updateProduct(@PathVariable("id") int id, @RequestBody ProductDto product) {
+        productService.updateProduct(id, product.getTitle(), product.getDescription(), product.getPrice(), product.getDiscount(), product.getImage(), product.getProductFields());
         return ResponseEntity.status(HttpStatus.OK)
                 .body("{ \"id\": "+ id + " }");
     }

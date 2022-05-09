@@ -51,7 +51,7 @@ public class ProductService {
 
             for (ProductField productField : productFieldRepository.selectAllProductFieldsFromProduct(product.id))
             {
-                ProductFieldDto newPFDto = new ProductFieldDto(productField.field.Name, productField.value, productField.field.Id);
+                ProductFieldDto newPFDto = new ProductFieldDto(productField.field.name, productField.value, productField.field.id);
                 dto.getProductFields().add(newPFDto);
             }
 
@@ -61,11 +61,19 @@ public class ProductService {
         return dtos;
     }
 
-    public Optional<Product> getProductById(int id){
-        return productRepository.findById(id);
+    public Optional<ProductDto> getProductById(int id){
+        ProductDto dto = new ProductDto();
+        Optional<Product> product = productRepository.findById(id);
+
+        for (ProductField productField : productFieldRepository.selectAllProductFieldsFromProduct(id))
+        {
+            ProductFieldDto newPFDto = new ProductFieldDto(productField.field.name, productField.value, productField.field.id);
+            dto.getProductFields().add(newPFDto);
+        }
+        return Optional.of(dto);
     }
 
-    public void createProduct(ProductDto product){
+    public Integer createProduct(ProductDto product){
         if(product.getTitle() != "" || product.getDescription()!= "") {
             Product newProduct = new Product(product.getTitle(), product.getDescription(), product.getPrice(), product.getDiscount(), product.getImage(), LocalDateTime.now(), product.getUpdatedAt(), null);
             productRepository.save(newProduct);
@@ -80,6 +88,7 @@ public class ProductService {
                 productFieldRepository.save(pf);
             }
         }
+        return productRepository.GetLastCreatedProduct().id;
     }
     public void deleteProduct(int productid){
         boolean exists = productRepository.existsById(productid);
@@ -95,7 +104,7 @@ public class ProductService {
     }
 
     @Transactional
-    public void updateProduct(int id, String Title, String Description, BigDecimal Price, int Discount, String Image) {
+    public void updateProduct(int id, String Title, String Description, BigDecimal Price, int Discount, String Image, List<ProductFieldDto> productFieldDtos) {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new IllegalStateException("product with id: " + id + " not found!"));
         if(Title != null &&
@@ -121,6 +130,19 @@ public class ProductService {
                 !Objects.equals(product.getImage(), Image)) {
             product.setImage(Image);
         }
+        for(ProductField pf : productFieldRepository.selectAllProductFieldsFromProduct(id))
+        {
+            productFieldRepository.delete(pf);
+        }
+        for(ProductFieldDto fieldDto: productFieldDtos)
+        {
+            Field field = FieldRepository.getById(fieldDto.getFieldId());
+            Product updatedProduct = productRepository.getById(id);
+            ProductFieldKey key = new ProductFieldKey(updatedProduct.getId(), field.getId());
+            ProductField pf = new ProductField(key, field, updatedProduct, fieldDto.getValue());
+            System.out.println(pf);
+            productFieldRepository.save(pf);
+        }
     }
 
     public List<ProductFieldDto> SelectAllProductFieldsFromProduct(int id)
@@ -136,7 +158,7 @@ public class ProductService {
 
         for (ProductField productField : productFieldRepository.selectAllProductFieldsFromProduct(id))
         {
-            ProductFieldDto dto = new ProductFieldDto(productField.field.Name, productField.value, productField.field.Id);
+            ProductFieldDto dto = new ProductFieldDto(productField.field.name, productField.value, productField.field.id);
             dtos.add(dto);
         }
 

@@ -8,17 +8,17 @@ public class Field {
 
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int Id;
+    public int id;
     @Column(unique=true)
-    public String Name;
+    public String name;
 
     public Field(int id, String name) {
-        Id = id;
-        Name = name;
+        id = id;
+        name = name;
     }
 
     public Field(String name) {
-        Name = name;
+        name = name;
     }
 
     public Field(){
@@ -26,26 +26,26 @@ public class Field {
     }
 
     public int getId() {
-        return Id;
+        return id;
     }
 
     public void setId(int id) {
-        Id = id;
+        id = id;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        name = name;
     }
 
     @Override
     public String toString() {
         return "Field{" +
-                "Id=" + Id +
-                ", Name='" + Name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 '}';
     }
 }
