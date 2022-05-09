@@ -37,7 +37,6 @@ public class FieldController
 
     @GetMapping("/{id}")
     public Optional<Field> getFieldById(@PathVariable int id) {
-
         return fieldService.selectFieldById(id);
     }
 }
