@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RestController
@@ -32,5 +33,11 @@ public class FieldController
         fieldService.createField(field);
         return ResponseEntity.status(HttpStatus.OK)
                 .body("{ \"id\": "+ field.getId() + " }");
+    }
+
+    @GetMapping("/{id}")
+    public Optional<Field> getFieldById(@PathVariable int id) {
+
+        return fieldService.selectFieldById(id);
     }
 }
