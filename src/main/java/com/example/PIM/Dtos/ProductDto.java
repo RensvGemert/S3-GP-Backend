@@ -1,15 +1,13 @@
-package com.example.PIM.model;
+package com.example.PIM.Dtos;
 
-import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
-@Entity
-@Table(name = "Products")
-public class Product {
-    @javax.persistence.Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-
+public class ProductDto
+{
     public int id;
     public String title;
     public String description;
@@ -18,16 +16,9 @@ public class Product {
     public String image;
     public LocalDateTime createdAt;
     public LocalDateTime updatedAt;
+    public List<ProductFieldDto> productFields = new ArrayList<>();
 
-    @ManyToOne
-    @JoinColumn(name = "companyId", referencedColumnName = "id")
-    private Company company;
-
-
-    public Product() {
-    }
-
-    public Product(int id, String title, String description, BigDecimal price, int discount, String image, LocalDateTime createdAt, LocalDateTime updatedAt, Company company) {
+    public ProductDto(int id, String title, String description, BigDecimal price, int discount, String image, LocalDateTime createdAt, LocalDateTime updatedAt, List<ProductFieldDto> productFields) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -36,10 +27,10 @@ public class Product {
         this.image = image;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.company = company;
+        this.productFields = productFields;
     }
 
-    public Product(String title, String description, BigDecimal price, int discount, String image, LocalDateTime createdAt, LocalDateTime updatedAt, Company company) {
+    public ProductDto(String title, String description, BigDecimal price, int discount, String image, LocalDateTime createdAt, LocalDateTime updatedAt, List<ProductFieldDto> productFields) {
         this.title = title;
         this.description = description;
         this.price = price;
@@ -47,7 +38,11 @@ public class Product {
         this.image = image;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.company = company;
+        this.productFields = productFields;
+    }
+
+    public ProductDto(){
+
     }
 
     public int getId() {
@@ -114,26 +109,24 @@ public class Product {
         this.updatedAt = updatedAt;
     }
 
-    public Company getCompany() {
-        return company;
+    public List<ProductFieldDto> getProductFields() {
+        return productFields;
     }
 
-    public void setCompany(Company company) {
-        this.company = company;
+    public void setProductFields(List<ProductFieldDto> productFields) {
+        this.productFields = productFields;
     }
 
     @Override
-    public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", price=" + price +
-                ", discount=" + discount +
-                ", image='" + image + '\'' +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                ", company=" + company +
-                '}';
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProductDto that = (ProductDto) o;
+        return id == that.id && discount == that.discount && Objects.equals(title, that.title) && Objects.equals(description, that.description) && Objects.equals(price, that.price) && Objects.equals(image, that.image) && Objects.equals(createdAt, that.createdAt) && Objects.equals(updatedAt, that.updatedAt) && Objects.equals(productFields, that.productFields);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, description, price, discount, image, createdAt, updatedAt, productFields);
     }
 }

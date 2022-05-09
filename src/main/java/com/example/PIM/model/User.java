@@ -16,7 +16,7 @@ public class User {
     public String password;
     public int role;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
     public Set<Message> Recievedmessages = new HashSet<>();
 
     /*@ManyToOne
