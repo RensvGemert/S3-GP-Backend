@@ -74,7 +74,7 @@ public class UserService {
     }
 
     public int login(Authentication authentication){
-        int id = userRepository.login(authentication.getEmail(), authentication.getPassword());
+        int id = userRepository.login(authentication.getUsername(), authentication.getPassword());
 
         return id;
     }
