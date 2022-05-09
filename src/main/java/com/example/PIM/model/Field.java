@@ -13,16 +13,15 @@ public class Field {
     public String name;
 
     public Field(int id, String name) {
-        id = id;
-        name = name;
+        this.id = id;
+        this.name = name;
     }
 
     public Field(String name) {
-        name = name;
+        this.name = name;
     }
 
-    public Field(){
-
+    public Field() {
     }
 
     public int getId() {
@@ -30,7 +29,7 @@ public class Field {
     }
 
     public void setId(int id) {
-        id = id;
+        this.id = id;
     }
 
     public String getName() {
@@ -38,7 +37,7 @@ public class Field {
     }
 
     public void setName(String name) {
-        name = name;
+        this.name = name;
     }
 
     @Override
