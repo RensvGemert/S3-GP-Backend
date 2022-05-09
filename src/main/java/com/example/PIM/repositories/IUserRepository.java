@@ -9,6 +9,6 @@ import static org.hibernate.loader.Loader.SELECT;
 public interface IUserRepository extends JpaRepository<User, Integer>
 {
     @Query(value = "SELECT `id` FROM `user` WHERE `email` = ?1 AND `password` = ?2", nativeQuery = true)
-    public int login(String email, String password);
+    int login(String email, String password);
 
 }

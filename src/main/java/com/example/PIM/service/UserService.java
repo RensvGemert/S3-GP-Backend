@@ -1,5 +1,6 @@
 package com.example.PIM.service;
 
+import com.example.PIM.model.AuthRepsonse;
 import com.example.PIM.model.Authentication;
 import com.example.PIM.model.Company;
 import com.example.PIM.model.User;
@@ -73,9 +74,11 @@ public class UserService {
         }
     }
 
-    public int login(Authentication authentication){
-        int id = userRepository.login(authentication.getUsername(), authentication.getPassword());
-
-        return id;
+    public AuthRepsonse login(Authentication authentication){
+        int user = userRepository.login(authentication.getUsername(), authentication.getPassword());
+        User userdata = userRepository.getById(user);
+//        Company companydata = companyRepository.getById(userdata.companyId);
+        AuthRepsonse authRepsonse = new AuthRepsonse(userdata.getId(), userdata.getRole());
+        return authRepsonse;
     }
 }

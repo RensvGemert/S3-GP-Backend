@@ -48,7 +48,7 @@ public class CompanyService {
     }
 
     @Transactional
-    public void updateCompany(int id, String name, String description, boolean companyRole) {
+    public void updateCompany(int id, String name, String description, int companyRole) {
         Company company = companyRepository.findById(id)
                 .orElseThrow(() -> new IllegalStateException("product with id: " + id + " not found!"));
         if(name != null &&
@@ -61,8 +61,8 @@ public class CompanyService {
                 !Objects.equals(company.getDescription(), description)) {
             company.setDescription(description);
         }
-        if(!Objects.equals(company.isRole(), companyRole)) {
-            company.setRole(companyRole);
+        if(!Objects.equals(company.getRole(), companyRole)) {
+            company.setRole(company.role);
         }
     }
 

@@ -12,7 +12,6 @@ public class Authentication {
         this.password = password;
     }
 
-
     public String getUsername() {
         return username;
     }

@@ -23,6 +23,10 @@ public class User {
     @JoinColumn(name = "companyId", referencedColumnName = "id")*/
     public int companyId;
 
+    public User(int id, int role) {
+        this.id = id;
+        this.role = role;
+    }
 
     public User() {
     }

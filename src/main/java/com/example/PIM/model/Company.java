@@ -14,7 +14,7 @@ public class Company
     public int id;
     public String name;
     public String description;
-    public boolean role;
+    public int role;
     public LocalDateTime createdAt;
     public LocalDateTime updatedAt;
     @OneToMany(mappedBy = "company")
@@ -29,22 +29,22 @@ public class Company
 
     }
 
-    public Company(int companyId, String companyName, String companyDescription, byte companyRole, LocalDateTime createdAt, LocalDateTime updatedAt, Set<Product> products, Set<User> users) {
+    public Company(int companyId, String companyName, String companyDescription, int companyRole, LocalDateTime createdAt, LocalDateTime updatedAt, Set<Product> products, Set<User> users) {
         this.id = companyId;
         this.name = companyName;
         this.description = companyDescription;
-        this.role = role;
+        this.role = companyRole;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.products = products;
         this.users = users;
     }
 
-    public Company(String name, String description, byte companyRole, LocalDateTime createdAt, LocalDateTime updatedAt, Set<Product> products, Set<User> users) {
+    public Company(String name, String description, int companyRole, LocalDateTime createdAt, LocalDateTime updatedAt, Set<Product> products, Set<User> users) {
 
         this.name = name;
         this.description = description;
-        this.role = role;
+        this.role = companyRole;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.products = products;
@@ -75,11 +75,11 @@ public class Company
         this.description = description;
     }
 
-    public boolean isRole() {
+    public int getRole() {
         return role;
     }
 
-    public void setRole(boolean role) {
+    public void setRole(int role) {
         this.role = role;
     }
 

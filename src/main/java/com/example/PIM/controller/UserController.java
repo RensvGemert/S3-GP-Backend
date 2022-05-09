@@ -1,7 +1,7 @@
 package com.example.PIM.controller;
 
+import com.example.PIM.model.AuthRepsonse;
 import com.example.PIM.model.Authentication;
-import com.example.PIM.model.Product;
 import com.example.PIM.model.User;
 import com.example.PIM.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +57,10 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody Authentication authentication) {
-        int id = userService.login(authentication);
-        return ResponseEntity.status(HttpStatus.OK).body("{ \"id\": "+ id + " }");
+        AuthRepsonse id = userService.login(authentication);
+        return ResponseEntity.status(HttpStatus.OK).body(
+                "{" +
+                        " \"userId\": " + id.getUserid() + "," +
+                        " \"role\": " + id.getRole() + " }");
     }
 }
