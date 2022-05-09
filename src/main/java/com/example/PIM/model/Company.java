@@ -11,15 +11,15 @@ public class Company
 {
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int companyId;
-    public String companyName;
-    public String companyDiscription;
-    public byte companyRole;
+    public int id;
+    public String name;
+    public String description;
+    public int role;
     public LocalDateTime createdAt;
     public LocalDateTime updatedAt;
     @OneToMany(mappedBy = "company", orphanRemoval = true)
     public Set<Product> products = new HashSet<>();
-    @OneToMany(mappedBy = "company", orphanRemoval = true)
+    @OneToMany(mappedBy = "companyId")
     public Set<User> users = new HashSet<>();
 
 
@@ -29,58 +29,58 @@ public class Company
 
     }
 
-    public Company(int companyId, String companyName, String companyDiscription, byte companyRole, LocalDateTime createdAt, LocalDateTime updatedAt, Set<Product> products, Set<User> users) {
-        this.companyId = companyId;
-        this.companyName = companyName;
-        this.companyDiscription = companyDiscription;
-        this.companyRole = companyRole;
+    public Company(int companyId, String companyName, String companyDescription, int companyRole, LocalDateTime createdAt, LocalDateTime updatedAt, Set<Product> products, Set<User> users) {
+        this.id = companyId;
+        this.name = companyName;
+        this.description = companyDescription;
+        this.role = companyRole;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.products = products;
         this.users = users;
     }
 
-    public Company(String companyName, String companyDiscription, byte companyRole, LocalDateTime createdAt, LocalDateTime updatedAt, Set<Product> products, Set<User> users) {
+    public Company(String name, String description, int companyRole, LocalDateTime createdAt, LocalDateTime updatedAt, Set<Product> products, Set<User> users) {
 
-        this.companyName = companyName;
-        this.companyDiscription = companyDiscription;
-        this.companyRole = companyRole;
+        this.name = name;
+        this.description = description;
+        this.role = companyRole;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.products = products;
         this.users = users;
     }
 
-    public int getCompanyId() {
-        return companyId;
+    public int getId() {
+        return id;
     }
 
-    public void setCompanyId(int companyId) {
-        this.companyId = companyId;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getCompanyName() {
-        return companyName;
+    public String getName() {
+        return name;
     }
 
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getCompanyDiscription() {
-        return companyDiscription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setCompanyDiscription(String companyDiscription) {
-        this.companyDiscription = companyDiscription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public byte getCompanyRole() {
-        return companyRole;
+    public int getRole() {
+        return role;
     }
 
-    public void setCompanyRole(byte companyRole) {
-        this.companyRole = companyRole;
+    public void setRole(int role) {
+        this.role = role;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -118,10 +118,10 @@ public class Company
     @Override
     public String toString() {
         return "Company{" +
-                "companyId=" + companyId +
-                ", companyName='" + companyName + '\'' +
-                ", companyDiscription='" + companyDiscription + '\'' +
-                ", companyRole=" + companyRole +
+                "companyId=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", role=" + role +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 ", products=" + products +
