@@ -20,7 +20,7 @@ public class Product {
     public LocalDateTime updatedAt;
 
     @ManyToOne
-    @JoinColumn(name = "companyId")
+    @JoinColumn(name = "companyId", referencedColumnName = "id")
     private Company company;
 
 
