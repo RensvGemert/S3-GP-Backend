@@ -4,10 +4,12 @@ public class AuthRepsonse {
 
     int userid;
     int role;
+    int companyRole;
 
-    public AuthRepsonse(int userid, int role) {
+    public AuthRepsonse(int userid, int role, int companyRole) {
         this.userid = userid;
         this.role = role;
+        this.companyRole = companyRole;
     }
 
     public int getUserid() {
@@ -25,4 +27,15 @@ public class AuthRepsonse {
     public void setRole(int role) {
         this.role = role;
     }
+
+    public int getCompanyRole() {
+        return role;
+    }
+
+    public void setCompanyRole(int role) {
+        this.role = role;
+    }
+
+
+
 }

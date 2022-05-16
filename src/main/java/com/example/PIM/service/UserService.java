@@ -37,8 +37,6 @@ public class UserService {
 
     public void createUser(User user){
         if(user.getName() != "" || user.getEmail()!= "" || user.getCompanyId() != 0) {
-            /*Company c = companyRepository.getById(user.getCompany().getCompanyId());
-            user.setCompany(c);*/
             userRepository.save(user);
         }
     }
@@ -77,8 +75,11 @@ public class UserService {
     public AuthRepsonse login(Authentication authentication){
         int user = userRepository.login(authentication.getUsername(), authentication.getPassword());
         User userdata = userRepository.getById(user);
-//        Company companydata = companyRepository.getById(userdata.companyId);
-        AuthRepsonse authRepsonse = new AuthRepsonse(userdata.getId(), userdata.getRole());
+
+        int company = userdata.getCompanyId();
+        Company companydata = companyRepository.getById(company);
+
+        AuthRepsonse authRepsonse = new AuthRepsonse(userdata.getId(), userdata.getRole(), companydata.getRole());
         return authRepsonse;
     }
 }

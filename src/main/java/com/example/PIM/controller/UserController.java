@@ -2,7 +2,9 @@ package com.example.PIM.controller;
 
 import com.example.PIM.model.AuthRepsonse;
 import com.example.PIM.model.Authentication;
+import com.example.PIM.model.Company;
 import com.example.PIM.model.User;
+import com.example.PIM.service.CompanyService;
 import com.example.PIM.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,10 +20,12 @@ import java.util.Optional;
 public class UserController {
 
     private final UserService userService;
+    private final CompanyService companyService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, CompanyService companyService) {
         this.userService = userService;
+        this.companyService = companyService;
     }
 
     @GetMapping
@@ -57,10 +61,11 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody Authentication authentication) {
-        AuthRepsonse id = userService.login(authentication);
+        AuthRepsonse response = userService.login(authentication);
         return ResponseEntity.status(HttpStatus.OK).body(
                 "{" +
-                        " \"userId\": " + id.getUserid() + "," +
-                        " \"role\": " + id.getRole() + " }");
+                        " \"userId\": " + response.getUserid() + "," +
+                        " \"companyRole\": " + response.getCompanyRole() + "," +
+                        " \"userRole\": " + response.getRole() + " }");
     }
 }
