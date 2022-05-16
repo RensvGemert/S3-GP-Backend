@@ -12,13 +12,13 @@ public class Field {
     @Column(unique=true)
     public String name;
 
-    public Field(int id, String name) {
-        id = id;
-        name = name;
+    public Field(int Id, String Name) {
+        id = Id;
+        name = Name;
     }
 
-    public Field(String name) {
-        name = name;
+    public Field(String Name) {
+        name = Name;
     }
 
     public Field(){
@@ -29,16 +29,16 @@ public class Field {
         return id;
     }
 
-    public void setId(int id) {
-        id = id;
+    public void setId(int Id) {
+        id = Id;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        name = name;
+    public void setName(String Name) {
+        name = Name;
     }
 
     @Override
