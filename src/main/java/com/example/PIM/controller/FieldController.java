@@ -40,4 +40,14 @@ public class FieldController
 
         return fieldService.selectFieldById(id);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<String> updateField(@PathVariable("id") int id, @RequestBody Field field) {
+
+        System.out.println(field);
+        fieldService.updateField(id, field.getName());
+        return ResponseEntity.status(HttpStatus.OK)
+                .body("{ \"id\": "+ id + " }");
+    }
+
 }

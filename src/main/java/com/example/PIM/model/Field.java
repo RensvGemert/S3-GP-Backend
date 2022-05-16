@@ -12,12 +12,12 @@ public class Field {
     @Column(unique=true)
     public String name;
 
-    public Field(int id, String name) {
+    public Field(int id, String nname) {
         id = id;
         name = name;
     }
 
-    public Field(String name) {
+    public Field(String nname) {
         name = name;
     }
 
@@ -37,8 +37,8 @@ public class Field {
         return name;
     }
 
-    public void setName(String name) {
-        name = name;
+    public void setName(String nname) {
+        name = nname;
     }
 
     @Override
