@@ -17,6 +17,36 @@ public class ProductDto
     public LocalDateTime createdAt;
     public LocalDateTime updatedAt;
     public List<ProductFieldDto> productFields = new ArrayList<>();
+    public int companyId;
+
+    public ProductDto(int id, String title, String description, BigDecimal price, int discount, String image, LocalDateTime createdAt, LocalDateTime updatedAt, List<ProductFieldDto> productFields, int companyId) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.price = price;
+        this.discount = discount;
+        this.image = image;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.productFields = productFields;
+        this.companyId = companyId;
+    }
+
+    public ProductDto(String title, String description, BigDecimal price, int discount, String image, LocalDateTime createdAt, LocalDateTime updatedAt, List<ProductFieldDto> productFields, int companyId) {
+        this.title = title;
+        this.description = description;
+        this.price = price;
+        this.discount = discount;
+        this.image = image;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.productFields = productFields;
+        this.companyId = companyId;
+    }
+
+    public ProductDto(){
+
+    }
 
     public ProductDto(int id, String title, String description, BigDecimal price, int discount, String image, LocalDateTime createdAt, LocalDateTime updatedAt, List<ProductFieldDto> productFields) {
         this.id = id;
@@ -28,21 +58,6 @@ public class ProductDto
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.productFields = productFields;
-    }
-
-    public ProductDto(String title, String description, BigDecimal price, int discount, String image, LocalDateTime createdAt, LocalDateTime updatedAt, List<ProductFieldDto> productFields) {
-        this.title = title;
-        this.description = description;
-        this.price = price;
-        this.discount = discount;
-        this.image = image;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-        this.productFields = productFields;
-    }
-
-    public ProductDto(){
-
     }
 
     public int getId() {
@@ -115,6 +130,14 @@ public class ProductDto
 
     public void setProductFields(List<ProductFieldDto> productFields) {
         this.productFields = productFields;
+    }
+
+    public int getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(int companyId) {
+        this.companyId = companyId;
     }
 
     @Override

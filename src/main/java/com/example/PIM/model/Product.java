@@ -18,16 +18,13 @@ public class Product {
     public String image;
     public LocalDateTime createdAt;
     public LocalDateTime updatedAt;
-
-    @ManyToOne
-    @JoinColumn(name = "companyId", referencedColumnName = "id")
-    private Company company;
+    public int companyId;
 
 
     public Product() {
     }
 
-    public Product(int id, String title, String description, BigDecimal price, int discount, String image, LocalDateTime createdAt, LocalDateTime updatedAt, Company company) {
+    public Product(int id, String title, String description, BigDecimal price, int discount, String image, LocalDateTime createdAt, LocalDateTime updatedAt, int companyId) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -36,10 +33,10 @@ public class Product {
         this.image = image;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.company = company;
+        this.companyId = companyId;
     }
 
-    public Product(String title, String description, BigDecimal price, int discount, String image, LocalDateTime createdAt, LocalDateTime updatedAt, Company company) {
+    public Product(String title, String description, BigDecimal price, int discount, String image, LocalDateTime createdAt, LocalDateTime updatedAt, int companyId) {
         this.title = title;
         this.description = description;
         this.price = price;
@@ -47,7 +44,7 @@ public class Product {
         this.image = image;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.company = company;
+        this.companyId = companyId;
     }
 
     public int getId() {
@@ -114,12 +111,12 @@ public class Product {
         this.updatedAt = updatedAt;
     }
 
-    public Company getCompany() {
-        return company;
+    public int getCompanyId() {
+        return companyId;
     }
 
-    public void setCompany(Company company) {
-        this.company = company;
+    public void setCompanyId(int companyId) {
+        this.companyId = companyId;
     }
 
     @Override
@@ -133,7 +130,7 @@ public class Product {
                 ", image='" + image + '\'' +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
-                ", company=" + company +
+                ", companyId=" + companyId +
                 '}';
     }
 }

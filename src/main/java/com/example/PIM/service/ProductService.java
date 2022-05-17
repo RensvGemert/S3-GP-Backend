@@ -40,14 +40,35 @@ public class ProductService {
         this.productFieldRepository.deleteProductFieldFromProduct(productFieldId, productId);
     }
 
+    public List<ProductDto> getProductsByCompany(int companyId){
+
+        List<ProductDto> dtos = new ArrayList<>();
+
+        for(Product product : productRepository.getProductsByCompanyId(companyId))
+        {
+            List<ProductFieldDto> productFieldDtos = new ArrayList<>();
+            ProductDto dto = new ProductDto(product.id, product.title, product.description, product.price, product.discount, product.image, product.createdAt, product.updatedAt, productFieldDtos, product.companyId);
+
+            for (ProductField productField : productFieldRepository.selectAllProductFieldsFromProduct(product.id))
+            {
+                ProductFieldDto newPFDto = new ProductFieldDto(productField.field.name, productField.value, productField.field.id);
+                dto.getProductFields().add(newPFDto);
+            }
+
+            dtos.add(dto);
+        }
+
+        return dtos;
+    }
+
     public List<ProductDto> getProducts(){
 
-        List<ProductDto> dtos = new ArrayList<ProductDto>();
+        List<ProductDto> dtos = new ArrayList<>();
 
         for(Product product : productRepository.findAll())
         {
-            List<ProductFieldDto> productFieldDtos = new ArrayList<ProductFieldDto>();
-            ProductDto dto = new ProductDto(product.id, product.title, product.description, product.price, product.discount, product.image, product.createdAt, product.updatedAt, productFieldDtos);
+            List<ProductFieldDto> productFieldDtos = new ArrayList<>();
+            ProductDto dto = new ProductDto(product.id, product.title, product.description, product.price, product.discount, product.image, product.createdAt, product.updatedAt, productFieldDtos, product.companyId);
 
             for (ProductField productField : productFieldRepository.selectAllProductFieldsFromProduct(product.id))
             {
@@ -75,7 +96,7 @@ public class ProductService {
 
     public Integer createProduct(ProductDto product){
         if(product.getTitle() != "" || product.getDescription()!= "") {
-            Product newProduct = new Product(product.getTitle(), product.getDescription(), product.getPrice(), product.getDiscount(), product.getImage(), LocalDateTime.now(), product.getUpdatedAt(), null);
+            Product newProduct = new Product(product.getTitle(), product.getDescription(), product.getPrice(), product.getDiscount(), product.getImage(), LocalDateTime.now(), product.getUpdatedAt(), product.getCompanyId());
             productRepository.save(newProduct);
             Product createdProduct = productRepository.GetLastCreatedProduct();
             for(ProductFieldDto fieldDto: product.getProductFields())
@@ -148,7 +169,7 @@ public class ProductService {
     public List<ProductFieldDto> SelectAllProductFieldsFromProduct(int id)
     {
 
-        List<ProductFieldDto> dtos = new ArrayList<ProductFieldDto>();
+        List<ProductFieldDto> dtos = new ArrayList<>();
         ProductDto dto1 = new ProductDto(1, null, null, null, 0, null, null, null, null);
         ProductDto dto2 = new ProductDto(1, null, null, null, 0, null, null, null, null);
         if(dto1.equals(dto2))

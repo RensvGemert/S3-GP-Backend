@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RestController
-@RequestMapping("/api/products")
+@RequestMapping("/api/company")
 public class ProductController {
 
     private final ProductService productService;
@@ -29,6 +29,12 @@ public class ProductController {
     public List<ProductDto> getProducts(){
         return productService.getProducts();
     }
+
+    @GetMapping("/{companyId}/products")
+    public List<ProductDto> getProductsByCompany(@PathVariable int companyId){
+        return productService.getProductsByCompany(companyId);
+    }
+
 
     @PostMapping
     public ResponseEntity<String> createProduct(@RequestBody ProductDto product) {
