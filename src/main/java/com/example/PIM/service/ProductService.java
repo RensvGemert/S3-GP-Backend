@@ -87,7 +87,7 @@ public class ProductService {
 
             for (ProductField productField : productFieldRepository.selectAllProductFieldsFromProduct(product.id))
             {
-                ProductFieldDto newPFDto = new ProductFieldDto(productField.value, productField.field.id);
+                ProductFieldDto newPFDto = new ProductFieldDto(productField.field.name, productField.value, productField.field.id);
                 dto.getProductFields().add(newPFDto);
             }
 
@@ -103,7 +103,7 @@ public class ProductService {
 
         for (ProductField productField : productFieldRepository.selectAllProductFieldsFromProduct(id))
         {
-            ProductFieldDto newPFDto = new ProductFieldDto(productField.value, productField.field.id);
+            ProductFieldDto newPFDto = new ProductFieldDto(productField.field.name, productField.value, productField.field.id);
             dto.getProductFields().add(newPFDto);
         }
         return Optional.of(dto);
@@ -194,7 +194,7 @@ public class ProductService {
 
         for (ProductField productField : productFieldRepository.selectAllProductFieldsFromProduct(id))
         {
-            ProductFieldDto dto = new ProductFieldDto(productField.value, productField.field.id);
+            ProductFieldDto dto = new ProductFieldDto(productField.field.name, productField.value, productField.field.id);
             dtos.add(dto);
         }
 
