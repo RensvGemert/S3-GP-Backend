@@ -19,6 +19,4 @@ public interface IProductRepository extends JpaRepository<Product, Integer> {
 
     @Query(value = "SELECT * FROM `products` ORDER BY `discount` DESC", nativeQuery = true)
     public List<Product> selectAllProductsOrderDiscount();
-
-
 }

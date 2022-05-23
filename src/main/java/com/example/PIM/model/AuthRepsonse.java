@@ -5,11 +5,21 @@ public class AuthRepsonse {
     int userid;
     int role;
     int companyRole;
+    int companyId;
 
-    public AuthRepsonse(int userid, int role, int companyRole) {
+    public AuthRepsonse(int userid, int role, int companyRole, int companyId) {
         this.userid = userid;
         this.role = role;
         this.companyRole = companyRole;
+        this.companyId = companyId;
+    }
+
+    public int getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(int companyId) {
+        this.companyId = companyId;
     }
 
     public int getUserid() {

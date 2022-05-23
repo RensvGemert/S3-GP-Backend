@@ -2,28 +2,27 @@ package com.example.PIM.service;
 
 import com.example.PIM.model.Field;
 import com.example.PIM.repositories.IFieldRepository;
-import com.example.PIM.repositories.IProductFieldRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
 public class FieldService {
 
     private final IFieldRepository fieldRepo;
-    private final IProductFieldRepository productFieldRepository;
 
     @Autowired
-    public FieldService(IFieldRepository repo, IProductFieldRepository productFieldRepository) {
+    public FieldService(IFieldRepository repo) {
         this.fieldRepo = repo;
-        this.productFieldRepository = productFieldRepository;
     }
 
     public void createField(Field field){
-        if(field.getName() != "" && field.getName() != null) {
-            fieldRepo.save(field);
+        if(field.getName() != "") {
+            this.fieldRepo.save(field);
         }
     }
 
@@ -37,7 +36,18 @@ public class FieldService {
         return this.fieldRepo.findAll();
     }
 
-    public Optional<Field> getFieldById(int id) {
-        return fieldRepo.findById(id);
+    @Transactional
+    public void updateField(int id, String Name)
+    {
+        Field field = fieldRepo.findById(id)
+                .orElseThrow(() -> new IllegalStateException("field with id: " + id + " not found!"));
+        if(Name != null &&
+                Name.length() > 0 &&
+                !Objects.equals(field.getName(), Name)) {
+            field.setName(Name);
+        }
+
     }
+
+
 }
