@@ -12,6 +12,11 @@ public interface IProductRepository extends JpaRepository<Product, Integer> {
     public Product GetLastCreatedProduct();
 
     @Query(value = "SELECT * FROM `products` WHERE `company_id` = ?1", nativeQuery = true)
-    public List<Product> getProductsByCompanyId(int id);
+    public List<Product> selectAllProductsFromCompany(int companyId);
 
+    @Query(value = "SELECT * FROM `products` ORDER BY `price` DESC", nativeQuery = true)
+    public List<Product> selectAllProductsOrderOnPriceFromCheapToExpensive();
+
+    @Query(value = "SELECT * FROM `products` ORDER BY `discount` DESC", nativeQuery = true)
+    public List<Product> selectAllProductsOrderDiscount();
 }
