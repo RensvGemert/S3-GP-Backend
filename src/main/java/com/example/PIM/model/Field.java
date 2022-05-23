@@ -12,32 +12,33 @@ public class Field {
     @Column(unique=true)
     public String name;
 
-    public Field(int id, String name) {
-        this.id = id;
-        this.name = name;
+    public Field(int Id, String Name) {
+        id = Id;
+        name = Name;
     }
 
-    public Field(String name) {
-        this.name = name;
+    public Field(String Name) {
+        name = Name;
     }
 
-    public Field() {
+    public Field(){
+
     }
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int Id) {
+        id = Id;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String Name) {
+        name = Name;
     }
 
     @Override
