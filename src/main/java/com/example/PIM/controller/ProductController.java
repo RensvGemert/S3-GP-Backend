@@ -2,7 +2,6 @@ package com.example.PIM.controller;
 
 import com.example.PIM.Dtos.ProductDto;
 import com.example.PIM.Dtos.ProductFieldDto;
-import com.example.PIM.model.Product;
 import com.example.PIM.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -70,4 +69,12 @@ public class ProductController {
     {
         return productService.SelectAllProductFieldsFromProduct(id);
     }
+
+    @GetMapping("/company/{id}")
+    public List<ProductDto> getAllProductsFromCompany(@PathVariable("id") int id)
+    {
+        return this.productService.getAllProductsFromCompany(id);
+    }
+
+
 }

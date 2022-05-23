@@ -164,4 +164,17 @@ public class ProductService {
 
         return dtos;
     }
+
+    public List<ProductDto> getAllProductsFromCompany(int id)
+    {
+        List<ProductDto> dtos = new ArrayList<ProductDto>();
+
+        for(Product pf : productRepository.selectAllProductsFromCompany(id))
+        {
+            ProductDto dto = new ProductDto(pf.getId(), pf.getTitle(), pf.getDescription(), pf.getPrice(), pf.getDiscount(), pf.getImage(), pf.getCreatedAt(), pf.getUpdatedAt(), SelectAllProductFieldsFromProduct(pf.getId()));
+            dtos.add(dto);
+        }
+
+        return dtos;
+    }
 }
