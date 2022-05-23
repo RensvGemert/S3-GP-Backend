@@ -37,7 +37,6 @@ class ProductControllerTest {
     MockMvc mockMvc;
 
     @Test
-    @Order(1)
     @Sql("/test-data.sql")
     public void getAllProductsByCompany_api_test() throws Exception{
         mockMvc.perform(MockMvcRequestBuilders.get("/api/company/1/products")
@@ -49,10 +48,9 @@ class ProductControllerTest {
     }
 
     @Test
-    @Order(2)
     @Sql("/test-data.sql")
     public void shouldDeleteProduct() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.delete("/api/company/1/products/1")
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/company/1/products/1001")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$[0].title").doesNotExist())
