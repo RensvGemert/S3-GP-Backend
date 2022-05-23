@@ -66,6 +66,7 @@ public class UserController {
                 "{" +
                         " \"userId\": " + response.getUserid() + "," +
                         " \"companyRole\": " + response.getCompanyRole() + "," +
+                        " \"companyId\": " + response.getCompanyId() + "," +
                         " \"userRole\": " + response.getRole() + " }");
     }
 }
