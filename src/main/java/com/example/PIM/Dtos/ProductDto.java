@@ -44,6 +44,18 @@ public class ProductDto
         this.companyId = companyId;
     }
 
+    // constructor for unit testing
+    public ProductDto(String title, String description, BigDecimal price, int discount, String image, LocalDateTime createdAt, LocalDateTime updatedAt, int companyId) {
+        this.title = title;
+        this.description = description;
+        this.price = price;
+        this.discount = discount;
+        this.image = image;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.companyId = companyId;
+    }
+
     public ProductDto(){
 
     }

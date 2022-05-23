@@ -23,15 +23,23 @@ import java.util.Optional;
 @Service
 public class ProductService {
 
-    private final IProductRepository productRepository;
-    private final IProductFieldRepository productFieldRepository;
-    private final IFieldRepository FieldRepository;
+    private IProductRepository productRepository;
+    private IProductFieldRepository productFieldRepository;
+    private IFieldRepository FieldRepository;
 
     @Autowired
-    public ProductService(IProductRepository productRepository, IProductFieldRepository productFieldRepo, IFieldRepository fieldRepo) {
+    public ProductService(IProductRepository productRepository) {
         this.productRepository = productRepository;
-        this.productFieldRepository = productFieldRepo;
-        this.FieldRepository = fieldRepo;
+    }
+
+    @Autowired
+    public ProductService(IProductFieldRepository productFieldRepository) {
+        this.productFieldRepository = productFieldRepository;
+    }
+
+    @Autowired
+    public ProductService(IFieldRepository fieldRepository) {
+        FieldRepository = fieldRepository;
     }
 
     public void deleteFieldFromProduct(int productFieldId, int productId)
