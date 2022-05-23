@@ -83,6 +83,13 @@ public class ProductController {
     }
 
 
+    @GetMapping("/filter/discount")
+    public List<ProductDto> getAllProductsFilterOnDiscount()
+    {
+        return this.productService.getAllProductsFilterOnDiscount();
+    }
+
+
 
 
 
