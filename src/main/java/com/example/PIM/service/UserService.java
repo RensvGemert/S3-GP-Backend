@@ -79,7 +79,7 @@ public class UserService {
         int company = userdata.getCompanyId();
         Company companydata = companyRepository.getById(company);
 
-        AuthRepsonse authRepsonse = new AuthRepsonse(userdata.getId(), userdata.getRole(), companydata.getRole());
+        AuthRepsonse authRepsonse = new AuthRepsonse(userdata.getId(), userdata.getRole(), companydata.getRole(), userdata.getCompanyId());
         return authRepsonse;
     }
 }
