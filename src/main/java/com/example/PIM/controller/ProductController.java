@@ -76,5 +76,15 @@ public class ProductController {
         return this.productService.getAllProductsFromCompany(id);
     }
 
+    @GetMapping("/filter/price")
+    public List<ProductDto> getAllProductsFilterOnPrice()
+    {
+        return this.productService.getAllProductsFilterOnPrice();
+    }
+
+
+
+
+
 
 }
