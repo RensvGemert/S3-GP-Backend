@@ -1,5 +1,7 @@
 package com.example.PIM.Dtos;
 
+import com.example.PIM.model.Category;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -17,8 +19,9 @@ public class ProductDto
     public LocalDateTime createdAt;
     public LocalDateTime updatedAt;
     public List<ProductFieldDto> productFields = new ArrayList<>();
+    public List<Integer> categories = new ArrayList<>();
 
-    public ProductDto(int id, String title, String description, BigDecimal price, int discount, String image, LocalDateTime createdAt, LocalDateTime updatedAt, List<ProductFieldDto> productFields) {
+    public ProductDto(int id, String title, String description, BigDecimal price, int discount, String image, LocalDateTime createdAt, LocalDateTime updatedAt, List<ProductFieldDto> productFields, List<Integer> categories) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -28,9 +31,10 @@ public class ProductDto
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.productFields = productFields;
+        this.categories = categories;
     }
 
-    public ProductDto(String title, String description, BigDecimal price, int discount, String image, LocalDateTime createdAt, LocalDateTime updatedAt, List<ProductFieldDto> productFields) {
+    public ProductDto(String title, String description, BigDecimal price, int discount, String image, LocalDateTime createdAt, LocalDateTime updatedAt, List<ProductFieldDto> productFields, List<Integer> categories) {
         this.title = title;
         this.description = description;
         this.price = price;
@@ -39,6 +43,7 @@ public class ProductDto
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.productFields = productFields;
+        this.categories = categories;
     }
 
     public ProductDto(){
@@ -117,16 +122,24 @@ public class ProductDto
         this.productFields = productFields;
     }
 
+    public List<Integer> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Integer> categories) {
+        this.categories = categories;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ProductDto that = (ProductDto) o;
-        return id == that.id && discount == that.discount && Objects.equals(title, that.title) && Objects.equals(description, that.description) && Objects.equals(price, that.price) && Objects.equals(image, that.image) && Objects.equals(createdAt, that.createdAt) && Objects.equals(updatedAt, that.updatedAt) && Objects.equals(productFields, that.productFields);
+        return id == that.id && discount == that.discount && Objects.equals(title, that.title) && Objects.equals(description, that.description) && Objects.equals(price, that.price) && Objects.equals(image, that.image) && Objects.equals(createdAt, that.createdAt) && Objects.equals(updatedAt, that.updatedAt) && Objects.equals(productFields, that.productFields) && Objects.equals(categories, that.categories);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, description, price, discount, image, createdAt, updatedAt, productFields);
+        return Objects.hash(id, title, description, price, discount, image, createdAt, updatedAt, productFields, categories);
     }
 }
