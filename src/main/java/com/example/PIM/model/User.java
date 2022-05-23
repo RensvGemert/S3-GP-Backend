@@ -1,6 +1,7 @@
 package com.example.PIM.model;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,6 +16,7 @@ public class User {
     public String email;
     public String password;
     public int role;
+    public LocalDateTime createdAt;
 
     @OneToMany(mappedBy = "user", orphanRemoval = true)
     public Set<Message> Recievedmessages = new HashSet<>();
@@ -31,7 +33,7 @@ public class User {
     public User() {
     }
 
-    public User(int id, String name, String email, String password, int role, int companyId, Set<Message> recievedmessages) {
+    public User(int id, String name, String email, String password, int role, int companyId, Set<Message> recievedmessages, LocalDateTime createdAt) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -39,15 +41,17 @@ public class User {
         this.role = role;
         this.companyId = companyId;
         Recievedmessages = recievedmessages;
+        this.createdAt = createdAt;
     }
 
-    public User(String name, String email, String password, int role, int companyId, Set<Message> recievedmessages) {
+    public User(String name, String email, String password, int role, int companyId, Set<Message> recievedmessages, LocalDateTime createdAt) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.role = role;
         this.companyId = companyId;
         Recievedmessages = recievedmessages;
+        this.createdAt = createdAt;
     }
 
     public int getId() {
@@ -90,6 +94,14 @@ public class User {
         this.role = role;
     }
 
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
     public Set<Message> getRecievedmessages() {
         return Recievedmessages;
     }
@@ -97,6 +109,7 @@ public class User {
     public void setRecievedmessages(Set<Message> recievedmessages) {
         Recievedmessages = recievedmessages;
     }
+
 
     public int getCompanyId() {
         return companyId;
@@ -116,6 +129,7 @@ public class User {
                 ", role=" + role +
                 ", companyId=" + companyId +
                 ", Recievedmessages=" + Recievedmessages +
+                ", created_At=" + createdAt +
                 '}';
     }
 }
