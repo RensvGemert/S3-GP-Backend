@@ -37,6 +37,16 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>8.0.28</version>
 		</dependency>
+
+		<!--	// integration tests on in memory h2 database-->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.4.199</version>
+			<scope>test</scope>
+		</dependency>
+		<!--	// h2 end -->
+
 	</dependencies>
 
 	<build>
