@@ -39,12 +39,23 @@ class ProductControllerTest {
     @Test
     @Order(1)
     @Sql("/test-data.sql")
-    public void shouldGetAllProducts() throws Exception{
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/company")
+    public void getAllProductsByCompany_api_test() throws Exception{
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/company/1/products")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.title").value("product 1"))
-                .andExpect(jsonPath("$.price").value(200))
+                .andExpect(jsonPath("$[0].title").value("product 1"))
+                .andExpect(jsonPath("$[0].price").value(200))
                 .andReturn();
+    }
+
+    @Test
+    @Order(2)
+    @Sql("/test-data.sql")
+    public void shouldDeleteProduct() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/company/1/products/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$[0].title").doesNotExist())
+                .andExpect(status().isOk());
     }
 }

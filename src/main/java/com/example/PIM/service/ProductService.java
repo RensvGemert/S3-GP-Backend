@@ -28,19 +28,26 @@ public class ProductService {
     private IFieldRepository FieldRepository;
 
     @Autowired
+    public ProductService(IProductRepository productRepository, IProductFieldRepository productFieldRepository, IFieldRepository fieldRepository) {
+        this.productRepository = productRepository;
+        this.productFieldRepository = productFieldRepository;
+        this.FieldRepository = fieldRepository;
+
+    }
+
     public ProductService(IProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 
-    @Autowired
-    public ProductService(IProductFieldRepository productFieldRepository) {
-        this.productFieldRepository = productFieldRepository;
-    }
-
-    @Autowired
-    public ProductService(IFieldRepository fieldRepository) {
-        FieldRepository = fieldRepository;
-    }
+//    @Autowired
+//    public ProductService(IProductFieldRepository productFieldRepository) {
+//        this.productFieldRepository = productFieldRepository;
+//    }
+//
+//    @Autowired
+//    public ProductService(IFieldRepository fieldRepository) {
+//        FieldRepository = fieldRepository;
+//    }
 
     public void deleteFieldFromProduct(int productFieldId, int productId)
     {
