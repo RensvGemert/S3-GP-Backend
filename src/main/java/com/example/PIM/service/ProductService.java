@@ -101,9 +101,11 @@ public class ProductService {
         return dtos;
     }
 
-    public Optional<ProductDto> getProductById(int id){
-        ProductDto dto = new ProductDto();
-        Optional<Product> product = productRepository.findById(id);
+    public ProductDto getProductById(int id){
+        Product product = productRepository.getProductFromCompanyById(id);
+        List<ProductFieldDto> productFieldDtos = new ArrayList<>();
+        List<Integer> categories = new ArrayList<Integer>();
+        ProductDto dto = new ProductDto(product.id , product.title, product.description, product.price, product.discount, product.image, product.createdAt, product.updatedAt, productFieldDtos, categories, product.companyId);
 
         for (ProductField productField : productFieldRepository.selectAllProductFieldsFromProduct(id))
         {
@@ -114,7 +116,7 @@ public class ProductService {
         {
             dto.getCategories().add(productCategory.category.id);
         }
-        return Optional.of(dto);
+        return dto;
     }
 
     public Integer createProduct(ProductDto product){
