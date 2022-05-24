@@ -39,11 +39,11 @@ public class AuthRepsonse {
     }
 
     public int getCompanyRole() {
-        return role;
+        return companyRole;
     }
 
-    public void setCompanyRole(int role) {
-        this.role = role;
+    public void setCompanyRole(int companyRole) {
+        this.companyRole = companyRole;
     }
 
 
