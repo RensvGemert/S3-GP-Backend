@@ -34,6 +34,8 @@ public class CategoryController {
                 .body("{ \"id\": "+ category.getId() + " }");
     }
 
+
+    
     @GetMapping("/{id}")
     public Optional<Category> getCategoryById(@PathVariable int id) {
         return categoryService.selectCategoryById(id);
