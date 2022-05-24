@@ -20,8 +20,9 @@ public class ProductDto
     public LocalDateTime updatedAt;
     public List<ProductFieldDto> productFields = new ArrayList<>();
     public List<Integer> categories = new ArrayList<>();
+    public int companyId;
+    public ProductDto(int id, String title, String description, BigDecimal price, int discount, String image, LocalDateTime createdAt, LocalDateTime updatedAt, List<ProductFieldDto> productFields, List<Integer> categories, int companyId) {
 
-    public ProductDto(int id, String title, String description, BigDecimal price, int discount, String image, LocalDateTime createdAt, LocalDateTime updatedAt, List<ProductFieldDto> productFields, List<Integer> categories) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -32,9 +33,10 @@ public class ProductDto
         this.updatedAt = updatedAt;
         this.productFields = productFields;
         this.categories = categories;
+        this.companyId = companyId;
     }
 
-    public ProductDto(String title, String description, BigDecimal price, int discount, String image, LocalDateTime createdAt, LocalDateTime updatedAt, List<ProductFieldDto> productFields, List<Integer> categories) {
+    public ProductDto(String title, String description, BigDecimal price, int discount, String image, LocalDateTime createdAt, LocalDateTime updatedAt, List<ProductFieldDto> productFields, List<Integer> categories, int companyId) {
         this.title = title;
         this.description = description;
         this.price = price;
@@ -44,10 +46,34 @@ public class ProductDto
         this.updatedAt = updatedAt;
         this.productFields = productFields;
         this.categories = categories;
+        this.companyId = companyId;
+    }
+    // constructor for unit testing
+    public ProductDto(String title, String description, BigDecimal price, int discount, String image, LocalDateTime createdAt, LocalDateTime updatedAt, int companyId) {
+        this.title = title;
+        this.description = description;
+        this.price = price;
+        this.discount = discount;
+        this.image = image;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.companyId = companyId;
     }
 
     public ProductDto(){
 
+    }
+
+    public ProductDto(int id, String title, String description, BigDecimal price, int discount, String image, LocalDateTime createdAt, LocalDateTime updatedAt, List<ProductFieldDto> productFields) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.price = price;
+        this.discount = discount;
+        this.image = image;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.productFields = productFields;
     }
 
     public int getId() {
@@ -128,6 +154,14 @@ public class ProductDto
 
     public void setCategories(List<Integer> categories) {
         this.categories = categories;
+    }
+  
+    public int getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(int companyId) {
+        this.companyId = companyId;
     }
 
     @Override

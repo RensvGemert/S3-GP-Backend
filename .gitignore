@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+## Copy and use .example file for configuration ##
+/src/main/resources/application.properties
