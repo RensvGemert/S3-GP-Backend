@@ -60,6 +60,19 @@ public class ProductDto
         this.companyId = companyId;
     }
 
+    public ProductDto(int id, String title, String description, BigDecimal price, int discount, String image, LocalDateTime createdAt, LocalDateTime updatedAt, List<ProductFieldDto> productFields, int companyId) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.price = price;
+        this.discount = discount;
+        this.image = image;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.productFields = productFields;
+        this.companyId = companyId;
+    }
+
     public ProductDto(){
 
     }

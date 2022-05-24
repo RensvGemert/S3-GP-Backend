@@ -50,7 +50,7 @@ class ProductControllerTest {
     @Test
     @Sql("/test-data.sql")
     public void shouldDeleteProduct() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.delete("/api/company/1/products/1001")
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/company/1/products/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$[0].title").doesNotExist())

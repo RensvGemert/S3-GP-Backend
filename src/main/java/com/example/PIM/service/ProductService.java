@@ -19,11 +19,11 @@ import java.util.Optional;
 @Service
 public class ProductService {
 
-    private final IProductRepository productRepository;
-    private final IProductFieldRepository productFieldRepository;
-    private final IFieldRepository FieldRepository;
-    private final IProductCatagoryRepository productCatagoryRepository;
-    private final ICategoryRepository categoryRepository;
+    private IProductRepository productRepository;
+    private IProductFieldRepository productFieldRepository;
+    private IFieldRepository FieldRepository;
+    private IProductCatagoryRepository productCatagoryRepository;
+    private ICategoryRepository categoryRepository;
 
     @Autowired
     public ProductService(IProductRepository productRepository, IProductFieldRepository productFieldRepo, IFieldRepository fieldRepo, IProductCatagoryRepository productCatagoryRepository, ICategoryRepository categoryRepository) {
@@ -32,6 +32,7 @@ public class ProductService {
         this.FieldRepository = fieldRepo;
         this.productCatagoryRepository = productCatagoryRepository;
         this.categoryRepository = categoryRepository;
+    }
 
     public ProductService(IProductRepository productRepository) {
         this.productRepository = productRepository;
