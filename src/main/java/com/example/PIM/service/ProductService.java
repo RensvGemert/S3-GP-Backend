@@ -1,14 +1,10 @@
 package com.example.PIM.service;
 
+import com.example.PIM.Dtos.CategoryDto;
 import com.example.PIM.Dtos.ProductDto;
 import com.example.PIM.Dtos.ProductFieldDto;
-import com.example.PIM.model.Field;
-import com.example.PIM.model.Product;
-import com.example.PIM.model.ProductField;
-import com.example.PIM.model.ProductFieldKey;
-import com.example.PIM.repositories.IFieldRepository;
-import com.example.PIM.repositories.IProductFieldRepository;
-import com.example.PIM.repositories.IProductRepository;
+import com.example.PIM.model.*;
+import com.example.PIM.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,17 +19,19 @@ import java.util.Optional;
 @Service
 public class ProductService {
 
-    private IProductRepository productRepository;
-    private IProductFieldRepository productFieldRepository;
-    private IFieldRepository FieldRepository;
+    private final IProductRepository productRepository;
+    private final IProductFieldRepository productFieldRepository;
+    private final IFieldRepository FieldRepository;
+    private final IProductCatagoryRepository productCatagoryRepository;
+    private final ICategoryRepository categoryRepository;
 
     @Autowired
-    public ProductService(IProductRepository productRepository, IProductFieldRepository productFieldRepository, IFieldRepository fieldRepository) {
+    public ProductService(IProductRepository productRepository, IProductFieldRepository productFieldRepo, IFieldRepository fieldRepo, IProductCatagoryRepository productCatagoryRepository, ICategoryRepository categoryRepository) {
         this.productRepository = productRepository;
-        this.productFieldRepository = productFieldRepository;
-        this.FieldRepository = fieldRepository;
-
-    }
+        this.productFieldRepository = productFieldRepo;
+        this.FieldRepository = fieldRepo;
+        this.productCatagoryRepository = productCatagoryRepository;
+        this.categoryRepository = categoryRepository;
 
     public ProductService(IProductRepository productRepository) {
         this.productRepository = productRepository;
@@ -82,15 +80,17 @@ public class ProductService {
 
         for(Product product : productRepository.findAll())
         {
-            List<ProductFieldDto> productFieldDtos = new ArrayList<>();
-            ProductDto dto = new ProductDto(product.id, product.title, product.description, product.price, product.discount, product.image, product.createdAt, product.updatedAt, productFieldDtos, product.companyId);
-
+            List<ProductFieldDto> productFieldDtos = new ArrayList<ProductFieldDto>();
+            List<Integer> categories = new ArrayList<Integer>();
+            ProductDto dto = new ProductDto(product.id, product.title, product.description, product.price, product.discount, product.image, product.createdAt, product.updatedAt, productFieldDtos, categories, product.companyId);
+            for ( ProductCategory productCategory : productCatagoryRepository.selectAllProductCategoriesFromProduct(product.id)) {
+                dto.getCategories().add(productCategory.category.id);
+            }
             for (ProductField productField : productFieldRepository.selectAllProductFieldsFromProduct(product.id))
             {
                 ProductFieldDto newPFDto = new ProductFieldDto(productField.field.name, productField.value, productField.field.id);
                 dto.getProductFields().add(newPFDto);
             }
-
             dtos.add(dto);
         }
 
@@ -106,6 +106,10 @@ public class ProductService {
             ProductFieldDto newPFDto = new ProductFieldDto(productField.field.name, productField.value, productField.field.id);
             dto.getProductFields().add(newPFDto);
         }
+        for(ProductCategory productCategory : productCatagoryRepository.selectAllProductCategoriesFromProduct(id))
+        {
+            dto.getCategories().add(productCategory.category.id);
+        }
         return Optional.of(dto);
     }
 
@@ -117,11 +121,17 @@ public class ProductService {
             for(ProductFieldDto fieldDto: product.getProductFields())
             {
                 Field field = FieldRepository.getById(fieldDto.getFieldId());
-
                 ProductFieldKey key = new ProductFieldKey(createdProduct.getId(), field.getId());
                 ProductField pf = new ProductField(key, field, createdProduct, fieldDto.getValue());
                 System.out.println(pf);
                 productFieldRepository.save(pf);
+            }
+            for(Integer categoryId : product.getCategories()){
+                Category category = categoryRepository.getById(categoryId);
+                ProductCategoryKey key = new ProductCategoryKey(createdProduct.getId(), category.getId());
+                ProductCategory productCategory = new ProductCategory(key, category, createdProduct);
+                System.out.println(productCategory);
+                productCatagoryRepository.save(productCategory);
             }
         }
         return productRepository.GetLastCreatedProduct().id;
@@ -136,11 +146,16 @@ public class ProductService {
         {
             productFieldRepository.delete(pf);
         }
+
+        for(ProductCategory pc : productCatagoryRepository.selectAllProductCategoriesFromProduct(productid))
+        {
+            productCatagoryRepository.delete(pc);
+        }
         productRepository.deleteById(productid);
     }
 
     @Transactional
-    public void updateProduct(int id, String Title, String Description, BigDecimal Price, int Discount, String Image, List<ProductFieldDto> productFieldDtos) {
+    public void updateProduct(int id, String Title, String Description, BigDecimal Price, int Discount, String Image, List<ProductFieldDto> productFieldDtos, List<Integer> categories) {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new IllegalStateException("product with id: " + id + " not found!"));
         if(Title != null &&
@@ -179,14 +194,27 @@ public class ProductService {
             System.out.println(pf);
             productFieldRepository.save(pf);
         }
+        for(ProductCategory productCategory : productCatagoryRepository.selectAllProductCategoriesFromProduct(id))
+        {
+            productCatagoryRepository.delete(productCategory);
+        }
+        for(Integer categoryId : categories)
+        {
+            Category category = categoryRepository.getById(categoryId);
+            Product updatedProduct = productRepository.getById(id);
+            ProductCategoryKey key = new ProductCategoryKey(updatedProduct.getId(), category.getId());
+            ProductCategory productCategory = new ProductCategory(key, category, updatedProduct);
+            System.out.println(productCategory);
+            productCatagoryRepository.save(productCategory);
+        }
     }
 
     public List<ProductFieldDto> SelectAllProductFieldsFromProduct(int id)
     {
-
         List<ProductFieldDto> dtos = new ArrayList<>();
         ProductDto dto1 = new ProductDto(1, null, null, null, 0, null, null, null, null);
         ProductDto dto2 = new ProductDto(1, null, null, null, 0, null, null, null, null);
+
         if(dto1.equals(dto2))
         {
             System.out.println("hhhhhhhhhhak");
