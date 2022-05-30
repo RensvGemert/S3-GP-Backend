@@ -36,7 +36,7 @@ public class UserService {
     }
 
     public void createUser(User user){
-        if(user.getName() != "" || user.getEmail()!= "" || user.getCompanyId() != 0) {
+        if(user.getName() != "" || user.getEmail()!= "" || user.getCompanyId() != 0 || user.getPassword() != "") {
             userRepository.save(user);
         }
     }
