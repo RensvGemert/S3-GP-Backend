@@ -23,7 +23,7 @@ public class ResourceSizeAdvice implements ResponseBodyAdvice<Collection<?>> {
 
     @Override
     public Collection<?> beforeBodyWrite(Collection<?> body, MethodParameter returnType, MediaType selectedContentType, Class<? extends HttpMessageConverter<?>> selectedConverterType, ServerHttpRequest request, ServerHttpResponse response) {
-        //response.getHeaders().add("Access-Control-Allow-Origin", "http://localhost:3000");
+        response.getHeaders().add("Access-Control-Allow-Origin", "*");
         response.getHeaders().add("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS");
         response.getHeaders().add("x-total-count", String.valueOf(body.size()));
         response.getHeaders().add("access-control-expose-headers", "X-Total-Count");
