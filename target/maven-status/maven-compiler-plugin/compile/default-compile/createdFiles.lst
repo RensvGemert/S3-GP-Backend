@@ -1,0 +1,6 @@
+com\example\PIM\service\CategoryService.class
+com\example\PIM\repositories\IProductCatagoryRepository.class
+com\example\PIM\controller\AllProductsController.class
+com\example\PIM\controller\CategoryController.class
+com\example\PIM\Dtos\CategoryDto.class
+com\example\PIM\repositories\ICategoryRepository.class

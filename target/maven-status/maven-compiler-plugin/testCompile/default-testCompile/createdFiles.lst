@@ -1,0 +1,3 @@
+com\example\PIM\service\ProductServiceTest.class
+com\example\PIM\repositories\IProductRepositoryTest.class
+com\example\PIM\controller\ProductControllerTest.class

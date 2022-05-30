@@ -1,0 +1,12 @@
+-------------------------------------------------------------------------------
+Test set: com.example.PIM.repositories.IProductRepositoryTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 3.274 s <<< FAILURE! - in com.example.PIM.repositories.IProductRepositoryTest
+itShouldReturnAllProductsByCompanyId_1  Time elapsed: 3.271 s  <<< ERROR!
+org.springframework.jdbc.datasource.init.ScriptStatementFailedException: 
+Failed to execute SQL script statement #1 of class path resource [test-data.sql]: INSERT INTO products (`id`, `company_id`, `title`, `price`, `discount`) VALUES (1, 1, 'product 1', 200, 1); nested exception is org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException: Unique index or primary key violation: "PRIMARY KEY ON PUBLIC.products(id) [1, 1, NULL, NULL, 1, NULL, 200.00, 'product 1', NULL]"; SQL statement:
+INSERT INTO products (`id`, `company_id`, `title`, `price`, `discount`) VALUES (1, 1, 'product 1', 200, 1) [23505-199]
+Caused by: org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException: 
+Unique index or primary key violation: "PRIMARY KEY ON PUBLIC.products(id) [1, 1, NULL, NULL, 1, NULL, 200.00, 'product 1', NULL]"; SQL statement:
+INSERT INTO products (`id`, `company_id`, `title`, `price`, `discount`) VALUES (1, 1, 'product 1', 200, 1) [23505-199]
+
