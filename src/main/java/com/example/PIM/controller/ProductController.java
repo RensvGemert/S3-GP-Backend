@@ -12,7 +12,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/company/{companyId}/products")
 public class ProductController {
