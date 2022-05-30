@@ -5,10 +5,7 @@ import com.example.PIM.model.Product;
 import com.example.PIM.model.User;
 import com.example.PIM.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,6 +24,12 @@ public class AllProductsController {
     @GetMapping("/all")
     public List<ProductDto> getAllProducts(){
         return productService.getProducts();
+    }
+
+    @GetMapping("all/{id}")
+    public ProductDto getProductbyId(@PathVariable("id") int id)
+    {
+        return productService.getProductById(id);
     }
 
 }

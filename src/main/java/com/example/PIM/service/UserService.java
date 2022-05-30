@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -26,9 +27,23 @@ public class UserService {
         this.companyRepository = companyRepository;
     }
 
-    public List<User> getUsers(){
-        return userRepository.findAll();
-
+    public List<User> getUsers(int companyId){
+        if(companyId == 1)
+        {
+            return userRepository.findAll();
+        }
+        else
+        {
+            List<User> allUsers = userRepository.findAll();
+            List<User> usersFromCompany = new ArrayList<>();
+            for (User user : allUsers) {
+                if(user.getCompanyId() == companyId)
+                {
+                    usersFromCompany.add(user);
+                }
+            }
+            return usersFromCompany;
+        }
     }
 
     public Optional<User> getUserById(int id){
@@ -36,7 +51,7 @@ public class UserService {
     }
 
     public void createUser(User user){
-        if(user.getName() != "" || user.getEmail()!= "" || user.getCompanyId() != 0) {
+        if(user.getName() != "" || user.getEmail()!= "" || user.getCompanyId() != 0 || user.getPassword() != "") {
             userRepository.save(user);
         }
     }
@@ -49,9 +64,9 @@ public class UserService {
     }
 
     @Transactional
-    public void updateUser(int id, String Name, String Email, String Password, int role) {
+    public void updateUser(int id, String Name, String Email, String Password, int companyId) {
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new IllegalStateException("product with id: " + id + " not found!"));
+                .orElseThrow(() -> new IllegalStateException("user with id: " + id + " not found!"));
         if(Name != null &&
                 Name.length() > 0 &&
                 !Objects.equals(user.getName(), Name)) {
@@ -66,9 +81,9 @@ public class UserService {
                 !Objects.equals(user.getPassword(), Password)) {
             user.setPassword(Password);
         }
-        if(role != 0 &&
-                !Objects.equals(user.getRole(), role)) {
-            user.setRole(role);
+        if(companyId != 0 &&
+                !Objects.equals(user.getCompanyId(), companyId)) {
+            user.setCompanyId(companyId);
         }
     }
 
