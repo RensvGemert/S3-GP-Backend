@@ -55,27 +55,39 @@ public class ProductService {
     }
 
     public List<ProductDto> getProductsByCompany(int companyId){
-
-        List<ProductDto> dtos = new ArrayList<>();
-
-        for(Product product : productRepository.getProductsByCompanyId(companyId))
+        if(companyId == 1)
         {
-            List<ProductFieldDto> productFieldDtos = new ArrayList<>();
-            List<Integer> categories = new ArrayList<Integer>();
-            ProductDto dto = new ProductDto(product.id, product.title, product.description, product.price, product.discount, product.image, product.createdAt, product.updatedAt, productFieldDtos, categories, product.companyId);
-            for ( ProductCategory productCategory : productCatagoryRepository.selectAllProductCategoriesFromProduct(product.id)) {
-                dto.getCategories().add(productCategory.category.id);
+            List<ProductDto> dtos = new ArrayList<>();
+            for (Product product : productRepository.findAll()) {
+                List<ProductFieldDto> productFieldDtos = new ArrayList<>();
+                List<Integer> categories = new ArrayList<Integer>();
+                ProductDto dto = new ProductDto(product.id, product.title, product.description, product.price, product.discount, product.image, product.createdAt, product.updatedAt, productFieldDtos, categories, product.companyId);
+                for (ProductCategory productCategory : productCatagoryRepository.selectAllProductCategoriesFromProduct(product.id)) {
+                    dto.getCategories().add(productCategory.category.id);
+                }
+                for (ProductField productField : productFieldRepository.selectAllProductFieldsFromProduct(product.id)) {
+                    ProductFieldDto newPFDto = new ProductFieldDto(productField.field.name, productField.value, productField.field.id);
+                    dto.getProductFields().add(newPFDto);
+                }
+                dtos.add(dto);
             }
-            for (ProductField productField : productFieldRepository.selectAllProductFieldsFromProduct(product.id))
-            {
-                ProductFieldDto newPFDto = new ProductFieldDto(productField.field.name, productField.value, productField.field.id);
-                dto.getProductFields().add(newPFDto);
-            }
-
-            dtos.add(dto);
+            return dtos;
         }
-
-        return dtos;
+        List<ProductDto> dtos = new ArrayList<>();
+            for (Product product : productRepository.getProductsByCompanyId(companyId)) {
+                List<ProductFieldDto> productFieldDtos = new ArrayList<>();
+                List<Integer> categories = new ArrayList<Integer>();
+                ProductDto dto = new ProductDto(product.id, product.title, product.description, product.price, product.discount, product.image, product.createdAt, product.updatedAt, productFieldDtos, categories, product.companyId);
+                for (ProductCategory productCategory : productCatagoryRepository.selectAllProductCategoriesFromProduct(product.id)) {
+                    dto.getCategories().add(productCategory.category.id);
+                }
+                for (ProductField productField : productFieldRepository.selectAllProductFieldsFromProduct(product.id)) {
+                    ProductFieldDto newPFDto = new ProductFieldDto(productField.field.name, productField.value, productField.field.id);
+                    dto.getProductFields().add(newPFDto);
+                }
+                dtos.add(dto);
+            }
+            return dtos;
     }
 
     public List<ProductDto> getProducts(){
