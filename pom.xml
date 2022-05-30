@@ -38,7 +38,7 @@
 			<version>8.0.28</version>
 		</dependency>
 
-		<!--	// integration tests on in memory h2 database-->
+		<!--	// integration tests on in memory h2 databasse-->
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
@@ -58,10 +58,13 @@
 	<build>
 		<plugins>
 			<plugin>
+
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
 		</plugins>
+		<finalName>pim</finalName>
 	</build>
 
 </project>
