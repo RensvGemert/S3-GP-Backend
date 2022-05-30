@@ -51,7 +51,7 @@ public class UserService {
     @Transactional
     public void updateUser(int id, String Name, String Email, String Password, int role) {
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new IllegalStateException("product with id: " + id + " not found!"));
+                .orElseThrow(() -> new IllegalStateException("user with id: " + id + " not found!"));
         if(Name != null &&
                 Name.length() > 0 &&
                 !Objects.equals(user.getName(), Name)) {
