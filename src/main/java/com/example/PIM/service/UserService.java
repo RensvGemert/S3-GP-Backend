@@ -49,7 +49,7 @@ public class UserService {
     }
 
     @Transactional
-    public void updateUser(int id, String Name, String Email, String Password, int role) {
+    public void updateUser(int id, String Name, String Email, String Password, int companyId) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new IllegalStateException("user with id: " + id + " not found!"));
         if(Name != null &&
@@ -66,9 +66,9 @@ public class UserService {
                 !Objects.equals(user.getPassword(), Password)) {
             user.setPassword(Password);
         }
-        if(role != 0 &&
-                !Objects.equals(user.getRole(), role)) {
-            user.setRole(role);
+        if(companyId != 0 &&
+                !Objects.equals(user.getCompanyId(), companyId)) {
+            user.setCompanyId(companyId);
         }
     }
 
