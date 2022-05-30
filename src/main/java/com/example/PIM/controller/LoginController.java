@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin("*")
+@CrossOrigin
 @RestController
 @RequestMapping("/api/users")
 public class LoginController {
@@ -20,7 +20,7 @@ public class LoginController {
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody Authentication authentication) {
         AuthRepsonse response = userService.login(authentication);
-        return ResponseEntity.status(HttpStatus.OK).body(
+        return ResponseEntity.status(HttpStatus.OK).header("Access-Control-Allow-Origin", "*").body(
                 "{" +
                         " \"userId\": " + response.getUserid() + "," +
                         " \"companyRole\": " + response.getCompanyRole() + "," +
