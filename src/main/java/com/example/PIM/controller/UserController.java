@@ -17,7 +17,7 @@ import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/company/{companyId}/users")
 public class UserController {
 
     private final UserService userService;
@@ -30,8 +30,8 @@ public class UserController {
     }
 
     @GetMapping
-    public List<User> getUsers(){
-        return userService.getUsers();
+    public List<User> getUsers(@PathVariable("companyId") int companyId){
+        return userService.getUsers(companyId);
     }
 
     @PostMapping
@@ -61,14 +61,4 @@ public class UserController {
                 .body("{ \"id\": "+ id + " }");
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody Authentication authentication) {
-        AuthRepsonse response = userService.login(authentication);
-        return ResponseEntity.status(HttpStatus.OK).body(
-                "{" +
-                        " \"userId\": " + response.getUserid() + "," +
-                        " \"companyRole\": " + response.getCompanyRole() + "," +
-                        " \"companyId\": " + response.getCompanyId() + "," +
-                        " \"userRole\": " + response.getRole() + " }");
-    }
 }

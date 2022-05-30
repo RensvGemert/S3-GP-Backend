@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -26,9 +27,23 @@ public class UserService {
         this.companyRepository = companyRepository;
     }
 
-    public List<User> getUsers(){
-        return userRepository.findAll();
-
+    public List<User> getUsers(int companyId){
+        if(companyId == 1)
+        {
+            return userRepository.findAll();
+        }
+        else
+        {
+            List<User> allUsers = userRepository.findAll();
+            List<User> usersFromCompany = new ArrayList<>();
+            for (User user : allUsers) {
+                if(user.getCompanyId() == companyId)
+                {
+                    usersFromCompany.add(user);
+                }
+            }
+            return usersFromCompany;
+        }
     }
 
     public Optional<User> getUserById(int id){
