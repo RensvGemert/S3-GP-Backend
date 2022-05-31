@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RestController
 @RequestMapping("/api/categories")
 public class CategoryController {
@@ -30,7 +30,7 @@ public class CategoryController {
     @PostMapping
     public ResponseEntity<String> createCategory(@RequestBody Category category) {
         categoryService.createCategory(category);
-        return ResponseEntity.status(HttpStatus.OK).header("Access-Control-Allow-Origin", "*")
+        return ResponseEntity.status(HttpStatus.OK)
                 .body("{ \"id\": "+ category.getId() + " }");
     }
 
@@ -43,14 +43,14 @@ public class CategoryController {
     public ResponseEntity<String> updateCategory(@PathVariable("id") int id, @RequestBody Category category) {
         System.out.println(category);
         categoryService.updateCategory(id, category.getName());
-        return ResponseEntity.status(HttpStatus.OK).header("Access-Control-Allow-Origin", "*")
+        return ResponseEntity.status(HttpStatus.OK)
                 .body("{ \"id\": "+ id + " }");
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteCategory(@PathVariable int id){
         categoryService.deleteCategory(id);
-        return ResponseEntity.status(HttpStatus.OK).header("Access-Control-Allow-Origin", "*")
+        return ResponseEntity.status(HttpStatus.OK)
                 .body("{ \"id\": "+ id + " }");
     }
 }

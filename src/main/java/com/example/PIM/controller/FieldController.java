@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RestController
 @RequestMapping("/api/fields")
 public class FieldController
@@ -31,7 +31,7 @@ public class FieldController
     @PostMapping
     public ResponseEntity<String> createField(@RequestBody Field field) {
         fieldService.createField(field);
-        return ResponseEntity.status(HttpStatus.OK).header("Access-Control-Allow-Origin", "*")
+        return ResponseEntity.status(HttpStatus.OK)
                 .body("{ \"id\": "+ field.getId() + " }");
     }
 

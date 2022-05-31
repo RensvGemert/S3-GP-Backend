@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RestController
 @RequestMapping("/api/companies")
 public class CompanyController {
@@ -28,7 +28,7 @@ public class CompanyController {
     @PostMapping
     public ResponseEntity<String> createCompany(@RequestBody Company company) {
         companyService.createCompany(company);
-        return ResponseEntity.status(HttpStatus.OK).header("Access-Control-Allow-Origin", "*")
+        return ResponseEntity.status(HttpStatus.OK)
                 .body("{ \"id\": "+ company.getId() + " }");
     }
 
@@ -40,14 +40,14 @@ public class CompanyController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteCompany(@PathVariable("id") int id) {
         companyService.deleteCompany(id);
-        return ResponseEntity.status(HttpStatus.OK).header("Access-Control-Allow-Origin", "*")
+        return ResponseEntity.status(HttpStatus.OK)
                 .body("{ \"id\": "+ id + " }");
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<String> updateCompany(@PathVariable("id") int id, @RequestBody Company company) {
         companyService.updateCompany(id, company.getName(), company.getDescription(), company.getRole());
-        return ResponseEntity.status(HttpStatus.OK).header("Access-Control-Allow-Origin", "*")
+        return ResponseEntity.status(HttpStatus.OK)
                 .body("{ \"id\": "+ id + " }");
     }
 }

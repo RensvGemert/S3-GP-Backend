@@ -12,7 +12,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RestController
 @RequestMapping("/api/company/{companyId}/products")
 public class ProductController {
@@ -39,14 +39,14 @@ public class ProductController {
     @PostMapping
     public ResponseEntity<String> createProduct(@RequestBody ProductDto product) {
         Integer id = productService.createProduct(product);
-        return ResponseEntity.status(HttpStatus.OK).header("Access-Control-Allow-Origin", "*")
+        return ResponseEntity.status(HttpStatus.OK)
                 .body("{ \"id\": "+ id + " }");
     }
 
     @DeleteMapping("/{id}")
 	public ResponseEntity<String> deleteProduct(@PathVariable("id") int id) {
         productService.deleteProduct(id);
-        return ResponseEntity.status(HttpStatus.OK).header("Access-Control-Allow-Origin", "*")
+        return ResponseEntity.status(HttpStatus.OK)
                 .body("{ \"id\": "+ id + " }");
     }
 
@@ -55,7 +55,7 @@ public class ProductController {
     public ResponseEntity<String> deleteProductFieldFromProduct(@PathVariable("id") int id, @PathVariable("id2") int id2) {
         System.out.println(id + id2 + " controller functie");
         productService.deleteFieldFromProduct(id, id2);
-        return ResponseEntity.status(HttpStatus.OK).header("Access-Control-Allow-Origin", "*")
+        return ResponseEntity.status(HttpStatus.OK)
                 .body("{ \"id\": "+ id + " }");
     }
 
@@ -63,7 +63,7 @@ public class ProductController {
     @PutMapping("/{id}")
     public ResponseEntity<String> updateProduct(@PathVariable("id") int id, @RequestBody ProductDto product) {
         productService.updateProduct(id, product.getTitle(), product.getDescription(), product.getPrice(), product.getDiscount(), product.getImage(), product.getProductFields(), product.getCategories());
-        return ResponseEntity.status(HttpStatus.OK).header("Access-Control-Allow-Origin", "*")
+        return ResponseEntity.status(HttpStatus.OK)
                 .body("{ \"id\": "+ id + " }");
     }
 
