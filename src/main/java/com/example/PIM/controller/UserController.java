@@ -30,8 +30,11 @@ public class UserController {
     }
 
     @GetMapping
-    public List<User> getUsers(@PathVariable("companyId") int companyId){
-        return userService.getUsers(companyId);
+    public List<User> getUsers(@PathVariable("companyId") int companyId,
+                               @RequestParam(name="_sort", defaultValue="id") String sort,
+                               @RequestParam(name="_order", defaultValue="ASC") String order,
+                               @RequestParam(name="name", defaultValue="") String search){
+        return userService.getUsers(companyId, sort, order, search);
     }
 
     @PostMapping

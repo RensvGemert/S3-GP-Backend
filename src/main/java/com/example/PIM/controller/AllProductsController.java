@@ -22,8 +22,11 @@ public class AllProductsController {
     }
 
     @GetMapping("/all")
-    public List<ProductDto> getAllProducts(){
-        return productService.getProducts();
+    public List<ProductDto> getAllProducts(@RequestParam(name="_sort", defaultValue="id") String sort,
+                                           @RequestParam(name="_order", defaultValue="ASC") String order,
+                                           @RequestParam(name="title", defaultValue="") String searchTitle,
+                                           @RequestParam(name="categories", defaultValue="0") int searchCategory ){
+        return productService.getProducts(sort, order, searchTitle, searchCategory);
     }
 
     @GetMapping("all/{id}")

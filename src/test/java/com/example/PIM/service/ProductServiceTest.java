@@ -34,7 +34,7 @@ class ProductServiceTest {
     @Test
     void canGetAllProducts(){
         // when
-        underTest.getProducts();
+        underTest.getProducts("title","ASC","",0);
         // then
         verify(productRepository).findAll();
     }

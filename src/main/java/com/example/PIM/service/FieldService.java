@@ -4,8 +4,10 @@ import com.example.PIM.model.Field;
 import com.example.PIM.repositories.IFieldRepository;
 import com.example.PIM.repositories.IProductFieldRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,9 +34,16 @@ public class FieldService {
         return fieldRepo.findById(id);
     }
 
-    public List<Field> selectAllFields()
+    public List<Field> selectAllFields(String sort, String order, String search)
     {
-        return this.fieldRepo.findAll();
+        List<Field> fields = new ArrayList<>();
+        for(Field field : fieldRepo.findAll(Sort.by(Sort.Direction.fromString(order), sort)))
+        {
+            if(field.name.toLowerCase().contains(search.toLowerCase())){
+                fields.add(field);
+            }
+        }
+        return fields;
     }
 
     public Optional<Field> getFieldById(int id) {

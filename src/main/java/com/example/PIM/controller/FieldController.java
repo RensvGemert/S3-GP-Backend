@@ -24,8 +24,10 @@ public class FieldController
     }
 
     @GetMapping
-    public List<Field> getFields(){
-        return fieldService.selectAllFields();
+    public List<Field> getFields(@RequestParam(name="_sort", defaultValue="id") String sort,
+                                 @RequestParam(name="_order", defaultValue="ASC") String order,
+                                 @RequestParam(name="name", defaultValue="") String search){
+        return fieldService.selectAllFields(sort, order, search);
     }
 
     @PostMapping

@@ -5,16 +5,17 @@ import com.example.PIM.Dtos.ProductDto;
 import com.example.PIM.Dtos.ProductFieldDto;
 import com.example.PIM.model.*;
 import com.example.PIM.repositories.*;
+import com.sun.istack.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class ProductService {
@@ -54,63 +55,101 @@ public class ProductService {
         this.productFieldRepository.deleteProductFieldFromProduct(productFieldId, productId);
     }
 
-    public List<ProductDto> getProductsByCompany(int companyId){
+    public List<ProductDto> getProductsByCompany(int companyId, @NotNull String sort, @NotNull String order, String searchTitle, int searchCatagory){
         if(companyId == 1)
         {
             List<ProductDto> dtos = new ArrayList<>();
-            for (Product product : productRepository.findAll()) {
-                List<ProductFieldDto> productFieldDtos = new ArrayList<>();
-                List<Integer> categories = new ArrayList<Integer>();
-                ProductDto dto = new ProductDto(product.id, product.title, product.description, product.price, product.discount, product.image, product.createdAt, product.updatedAt, productFieldDtos, categories, product.companyId);
-                for (ProductCategory productCategory : productCatagoryRepository.selectAllProductCategoriesFromProduct(product.id)) {
-                    dto.getCategories().add(productCategory.category.id);
+            for (Product product : productRepository.findAll(Sort.by(Sort.Direction.fromString(order), sort))) {
+                if(product.title.toLowerCase().contains(searchTitle.toLowerCase())){
+                    List<ProductFieldDto> productFieldDtos = new ArrayList<>();
+                    List<Integer> categories = new ArrayList<Integer>();
+                    ProductDto dto = new ProductDto(product.id, product.title, product.description, product.price, product.discount, product.image, product.createdAt, product.updatedAt, productFieldDtos, categories, product.companyId);
+                    for (ProductCategory productCategory : productCatagoryRepository.selectAllProductCategoriesFromProduct(product.id)) {
+                        dto.getCategories().add(productCategory.category.id);
+                    }
+                    for (ProductField productField : productFieldRepository.selectAllProductFieldsFromProduct(product.id)) {
+                        ProductFieldDto newPFDto = new ProductFieldDto(productField.field.name, productField.value, productField.field.id);
+                        dto.getProductFields().add(newPFDto);
+                    }
+                    dtos.add(dto);
                 }
-                for (ProductField productField : productFieldRepository.selectAllProductFieldsFromProduct(product.id)) {
-                    ProductFieldDto newPFDto = new ProductFieldDto(productField.field.name, productField.value, productField.field.id);
-                    dto.getProductFields().add(newPFDto);
-                }
-                dtos.add(dto);
             }
-            return dtos;
+
+            List<ProductDto> categoryFilterDtos = new ArrayList<>();
+            for(ProductDto product : dtos){
+                if(searchCatagory == 0){
+                    return dtos;
+                }
+                else{
+                    if(product.getCategories().contains(searchCatagory)){
+                        categoryFilterDtos.add(product);
+                    }
+                }
+            }
+            return categoryFilterDtos;
         }
         List<ProductDto> dtos = new ArrayList<>();
-            for (Product product : productRepository.getProductsByCompanyId(companyId)) {
-                List<ProductFieldDto> productFieldDtos = new ArrayList<>();
-                List<Integer> categories = new ArrayList<Integer>();
-                ProductDto dto = new ProductDto(product.id, product.title, product.description, product.price, product.discount, product.image, product.createdAt, product.updatedAt, productFieldDtos, categories, product.companyId);
-                for (ProductCategory productCategory : productCatagoryRepository.selectAllProductCategoriesFromProduct(product.id)) {
-                    dto.getCategories().add(productCategory.category.id);
+            for (Product product : productRepository.findAll(Sort.by(Sort.Direction.fromString(order), sort))) {
+                if(product.companyId == companyId && product.title.toLowerCase().contains(searchTitle.toLowerCase())){
+                    List<ProductFieldDto> productFieldDtos = new ArrayList<>();
+                    List<Integer> categories = new ArrayList<Integer>();
+                    ProductDto dto = new ProductDto(product.id, product.title, product.description, product.price, product.discount, product.image, product.createdAt, product.updatedAt, productFieldDtos, categories, product.companyId);
+                    for (ProductCategory productCategory : productCatagoryRepository.selectAllProductCategoriesFromProduct(product.id)) {
+                        dto.getCategories().add(productCategory.category.id);
+                    }
+                    for (ProductField productField : productFieldRepository.selectAllProductFieldsFromProduct(product.id)) {
+                        ProductFieldDto newPFDto = new ProductFieldDto(productField.field.name, productField.value, productField.field.id);
+                        dto.getProductFields().add(newPFDto);
+                    }
+                    dtos.add(dto);
                 }
-                for (ProductField productField : productFieldRepository.selectAllProductFieldsFromProduct(product.id)) {
-                    ProductFieldDto newPFDto = new ProductFieldDto(productField.field.name, productField.value, productField.field.id);
-                    dto.getProductFields().add(newPFDto);
-                }
-                dtos.add(dto);
             }
-            return dtos;
+
+        List<ProductDto> categoryFilterDtos = new ArrayList<>();
+        for(ProductDto product : dtos){
+            if(searchCatagory == 0){
+                return dtos;
+            }
+            else{
+                if(product.getCategories().contains(searchCatagory)){
+                    categoryFilterDtos.add(product);
+                }
+            }
+        }
+        return categoryFilterDtos;
     }
 
-    public List<ProductDto> getProducts(){
-
+    public List<ProductDto> getProducts(@NotNull String sort, @NotNull String order, String searchTitle, int searchCatagory){
         List<ProductDto> dtos = new ArrayList<>();
-
-        for(Product product : productRepository.findAll())
+        for(Product product : productRepository.findAll(Sort.by(Sort.Direction.fromString(order), sort)))
         {
-            List<ProductFieldDto> productFieldDtos = new ArrayList<ProductFieldDto>();
-            List<Integer> categories = new ArrayList<Integer>();
-            ProductDto dto = new ProductDto(product.id, product.title, product.description, product.price, product.discount, product.image, product.createdAt, product.updatedAt, productFieldDtos, categories, product.companyId);
-            for ( ProductCategory productCategory : productCatagoryRepository.selectAllProductCategoriesFromProduct(product.id)) {
-                dto.getCategories().add(productCategory.category.id);
+            if(product.title.toLowerCase().contains(searchTitle.toLowerCase())) {
+                List<ProductFieldDto> productFieldDtos = new ArrayList<ProductFieldDto>();
+                List<Integer> categories = new ArrayList<Integer>();
+                ProductDto dto = new ProductDto(product.id, product.title, product.description, product.price, product.discount, product.image, product.createdAt, product.updatedAt, productFieldDtos, categories, product.companyId);
+                for (ProductCategory productCategory : productCatagoryRepository.selectAllProductCategoriesFromProduct(product.id)) {
+                    dto.getCategories().add(productCategory.category.id);
+                }
+                for (ProductField productField : productFieldRepository.selectAllProductFieldsFromProduct(product.id)) {
+                    ProductFieldDto newPFDto = new ProductFieldDto(productField.field.name, productField.value, productField.field.id);
+                    dto.getProductFields().add(newPFDto);
+                }
+                dtos.add(dto);
             }
-            for (ProductField productField : productFieldRepository.selectAllProductFieldsFromProduct(product.id))
-            {
-                ProductFieldDto newPFDto = new ProductFieldDto(productField.field.name, productField.value, productField.field.id);
-                dto.getProductFields().add(newPFDto);
-            }
-            dtos.add(dto);
         }
 
-        return dtos;
+        List<ProductDto> categoryFilterDtos = new ArrayList<>();
+        for(ProductDto product : dtos){
+            if(searchCatagory == 0){
+                return dtos;
+            }
+            else{
+                if(product.getCategories().contains(searchCatagory)){
+                    categoryFilterDtos.add(product);
+                }
+            }
+        }
+        return categoryFilterDtos;
     }
 
     public ProductDto getProductById(int id){
