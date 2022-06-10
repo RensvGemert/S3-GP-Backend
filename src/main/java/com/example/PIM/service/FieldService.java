@@ -1,6 +1,8 @@
 package com.example.PIM.service;
 
 import com.example.PIM.model.Field;
+import com.example.PIM.model.ProductCategory;
+import com.example.PIM.model.ProductField;
 import com.example.PIM.repositories.IFieldRepository;
 import com.example.PIM.repositories.IProductFieldRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,5 +50,16 @@ public class FieldService {
 
     public Optional<Field> getFieldById(int id) {
         return fieldRepo.findById(id);
+    }
+
+    public void deleteField(int id) {
+        boolean exists = fieldRepo.existsById(id);
+        if(!exists){
+            throw new IllegalStateException("Category with id: " + id + " does not exist");
+        }
+        for ( ProductField productField : productFieldRepository.selectAllProductFieldsFromField(id) ) {
+            productFieldRepository.delete(productField);
+        }
+        fieldRepo.deleteById(id);
     }
 }

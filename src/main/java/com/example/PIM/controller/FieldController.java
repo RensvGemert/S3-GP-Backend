@@ -41,4 +41,11 @@ public class FieldController
     public Optional<Field> getFieldById(@PathVariable int id) {
         return fieldService.selectFieldById(id);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteField(@PathVariable int id){
+        fieldService.deleteField(id);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body("{ \"id\": "+ id + " }");
+    }
 }
