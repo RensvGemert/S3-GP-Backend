@@ -23,8 +23,10 @@ public class CategoryController {
     }
 
     @GetMapping
-    public List<Category> getCategories(){
-        return categoryService.selectAllCategories();
+    public List<Category> getCategories(@RequestParam(name="_sort", defaultValue="id") String sort,
+                                        @RequestParam(name="_order", defaultValue="ASC") String order,
+                                        @RequestParam(name="name", defaultValue="") String search){
+        return categoryService.selectAllCategories(sort, order, search);
     }
 
     @PostMapping

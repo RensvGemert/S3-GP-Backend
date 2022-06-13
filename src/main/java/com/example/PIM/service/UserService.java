@@ -7,6 +7,7 @@ import com.example.PIM.model.User;
 import com.example.PIM.repositories.ICompanyRepository;
 import com.example.PIM.repositories.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,17 +28,24 @@ public class UserService {
         this.companyRepository = companyRepository;
     }
 
-    public List<User> getUsers(int companyId){
+    public List<User> getUsers(int companyId, String sort, String order, String search){
         if(companyId == 1)
         {
-            return userRepository.findAll();
+            List<User> users = new ArrayList<>();
+            for(User user : userRepository.findAll(Sort.by(Sort.Direction.fromString(order), sort)))
+            {
+                if(user.name.toLowerCase().contains(search.toLowerCase()) || user.email.toLowerCase().contains(search.toLowerCase())){
+                    users.add(user);
+                }
+            }
+            return users;
         }
         else
         {
-            List<User> allUsers = userRepository.findAll();
+            List<User> allUsers = userRepository.findAll(Sort.by(Sort.Direction.fromString(order), sort));
             List<User> usersFromCompany = new ArrayList<>();
             for (User user : allUsers) {
-                if(user.getCompanyId() == companyId)
+                if(user.getCompanyId() == companyId && (user.name.toLowerCase().contains(search.toLowerCase()) || user.email.toLowerCase().contains(search.toLowerCase())))
                 {
                     usersFromCompany.add(user);
                 }

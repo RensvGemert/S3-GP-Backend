@@ -24,8 +24,10 @@ public class FieldController
     }
 
     @GetMapping
-    public List<Field> getFields(){
-        return fieldService.selectAllFields();
+    public List<Field> getFields(@RequestParam(name="_sort", defaultValue="id") String sort,
+                                 @RequestParam(name="_order", defaultValue="ASC") String order,
+                                 @RequestParam(name="name", defaultValue="") String search){
+        return fieldService.selectAllFields(sort, order, search);
     }
 
     @PostMapping
@@ -38,5 +40,12 @@ public class FieldController
     @GetMapping("/{id}")
     public Optional<Field> getFieldById(@PathVariable int id) {
         return fieldService.selectFieldById(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteField(@PathVariable int id){
+        fieldService.deleteField(id);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body("{ \"id\": "+ id + " }");
     }
 }

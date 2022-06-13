@@ -4,6 +4,7 @@ import com.example.PIM.Dtos.ProductDto;
 import com.example.PIM.Dtos.ProductFieldDto;
 import com.example.PIM.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,8 +27,13 @@ public class ProductController {
 
 
     @GetMapping
-    public List<ProductDto> getProductsByCompany(@PathVariable int companyId){
-        return productService.getProductsByCompany(companyId);
+    public List<ProductDto> getProductsByCompany(@PathVariable int companyId,
+                                                 @RequestParam(name="_sort", defaultValue="id") String sort,
+                                                 @RequestParam(name="_order", defaultValue="ASC") String order,
+                                                 @RequestParam(name="title", defaultValue="") String searchTitle,
+                                                 @RequestParam(name="categories", defaultValue="0") Integer searchCategory)
+    {
+        return productService.getProductsByCompany(companyId, sort, order, searchTitle, searchCategory);
     }
 
     @GetMapping("/{id}")

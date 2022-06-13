@@ -5,10 +5,12 @@ import com.example.PIM.model.ProductCategory;
 import com.example.PIM.repositories.ICategoryRepository;
 import com.example.PIM.repositories.IProductCatagoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,8 +25,14 @@ public class CategoryService {
         this.productCatagoryRepository = productCatagoryRepository;
     }
 
-    public List<Category> selectAllCategories() {
-        return categoryRepository.findAll();
+    public List<Category> selectAllCategories(String sort, String order, String search) {
+        List<Category> categories = new ArrayList<>();
+        for(Category category : categoryRepository.findAll(Sort.by(Sort.Direction.fromString(order), sort))){
+            if(category.name.toLowerCase().contains(search.toLowerCase())){
+                categories.add(category);
+            }
+        }
+        return categories;
     }
 
     public void createCategory(Category category) {
