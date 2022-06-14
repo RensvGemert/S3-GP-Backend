@@ -1,7 +1,6 @@
 package com.example.PIM.service;
 
 import com.example.PIM.model.Field;
-import com.example.PIM.model.ProductCategory;
 import com.example.PIM.model.ProductField;
 import com.example.PIM.repositories.IFieldRepository;
 import com.example.PIM.repositories.IProductFieldRepository;
@@ -9,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -61,5 +61,15 @@ public class FieldService {
             productFieldRepository.delete(productField);
         }
         fieldRepo.deleteById(id);
+    }
+
+    @Transactional
+    public void updateField(int id, String name) {
+        Field field = fieldRepo.findById(id)
+                .orElseThrow(() -> new IllegalStateException("Field with id: " + id + " not found!"));
+        if(name.length() > 0 && name != null && name != field.name){
+                field.setName(name);
+
+        }
     }
 }

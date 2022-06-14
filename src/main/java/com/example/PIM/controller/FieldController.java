@@ -48,4 +48,12 @@ public class FieldController
         return ResponseEntity.status(HttpStatus.OK)
                 .body("{ \"id\": "+ id + " }");
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<String> updateField(@PathVariable("id") int id, @RequestBody Field field) {
+        System.out.println(field);
+        fieldService.updateField(id, field.getName());
+        return ResponseEntity.status(HttpStatus.OK)
+                .body("{ \"id\": "+ id + " }");
+    }
 }
